@@ -249,7 +249,7 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
-  - ReactNativeNavigation (from `../node_modules/react-native-navigation`)
+  - ReactNativeNavigation (from `../node_modules/react-native-navigation/ReactNativeNavigation.podspec`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -306,7 +306,7 @@ EXTERNAL SOURCES:
   ReactCommon:
     :path: "../node_modules/react-native/ReactCommon"
   ReactNativeNavigation:
-    :path: "../node_modules/react-native-navigation"
+    :podspec: "../node_modules/react-native-navigation/ReactNativeNavigation.podspec"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -339,6 +339,6 @@ SPEC CHECKSUMS:
   ReactNativeNavigation: 57daead27457bb7b28635f8ccb9f083bcf563fa0
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: bbdcce41ec4a5a6eda8078dc6e5a74cb984aaa2e
+PODFILE CHECKSUM: af188d29a50ac04c70c9b182e1921bd59b46fb10
 
 COCOAPODS: 1.8.4
