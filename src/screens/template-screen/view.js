@@ -1,13 +1,12 @@
 import React from 'react';
-import { Text, SafeAreaView } from 'react-native';
+import { Text, View } from 'react-native';
 import styles from './styles';
 
 class ScreenName extends React.Component {
 	render() {
 		return (
-			<SafeAreaView style={styles.container}>
-				<Text>Appsider boilerplate app</Text>
-			</SafeAreaView>
+			<View style={styles.container}>
+			</View>
 		);
 	}
 }

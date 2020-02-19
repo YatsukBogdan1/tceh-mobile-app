@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import { TEMPLATE_SCREEN_NAME } from 'constants/screens';
+import { UI_KIT_DEMO_SCREEN } from 'constants/screens';
 import { registerScreens } from 'navigation';
 import API from 'api';
 
@@ -11,7 +11,7 @@ export const start = () => {
 		Navigation.setRoot({
 			root: {
 				component: {
-					name: TEMPLATE_SCREEN_NAME,
+					name: UI_KIT_DEMO_SCREEN,
 				},
 			},
 		});
