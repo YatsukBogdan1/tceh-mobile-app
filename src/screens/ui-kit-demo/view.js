@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, ScrollView, Slider } from 'react-native';
+import { Text, ScrollView } from 'react-native';
 import styles from './styles';
 import CustomButton from 'components/custom-button';
 import CustomSelect from 'components/custom-select';
@@ -7,7 +7,8 @@ import CustomSwitch from 'components/custom-switch';
 import CustomTextInput from 'components/custom-text-input';
 import Footer from 'components/footer';
 import BottomTabBar from 'components/bottom-tab-bar';
-import CustomMultiSlider from 'components/custom-slider';
+import CustomSlider from 'components/custom-slider';
+import CustomRadioButton from 'components/radio-button';
 
 class UIKitDemo extends React.Component {
 	state = {
@@ -22,15 +23,15 @@ class UIKitDemo extends React.Component {
 		switchValue: false,
 
 		sliderValue: 10,
-		multiSliderValues: [10, 50],
+		radioValue: '1',
 	};
 
 	onInputValueChange = value => this.setState({ inputValue: value }, this.validateInputValue);
 	onInputValue2Change = value => this.setState({ inputValue2: value }, this.validateInput2Value);
 	onSelectValueChange = value => this.setState({ selectValue: value });
 	onSwitchValueChange = value => this.setState({ switchValue: value });
-	onSliderValueChange = value => this.setState({ sliderValue: value });
-	onMultiSliderValuesChange = values => this.setState({ multiSliderValues: values });
+	onSliderValueChange = value => this.setState({ sliderValue: Math.floor(value) });
+	onRadioChange = value => this.setState({ radioValue: value });
 	validateInputValue = async () => {
 		if (this.state.inputValue.length === 0) {
 			return this.setState({ inputError: 'Please enter field value' });
@@ -47,16 +48,26 @@ class UIKitDemo extends React.Component {
 
 	render() {
 		return (
-			<ScrollView scrollEnabled={false} keyboardShouldPersistTaps='never' style={styles.container}>
+			<ScrollView keyboardShouldPersistTaps='never' style={styles.container}>
 				<Text style={styles.mainHeaderText}>UI Kit Demo Screen</Text>
-				<Text style={styles.subheaderText}>Custom Slider</Text>
-				<Text style={styles.componentText}>Left Value: {this.state.multiSliderValues[0]}</Text>
-				<Text style={styles.componentText}>Right Value: {this.state.multiSliderValues[1]}</Text>
-				<CustomMultiSlider
+				<Text style={styles.subheaderText}>Radio Button</Text>
+				<CustomRadioButton
+					checked={this.state.radioValue === '1'}
+					value='1'
+					onPress={() => this.onRadioChange('1')}
+				/>
+				<CustomRadioButton
+					checked={this.state.radioValue === '2'}
+					value='2'
+					onPress={() => this.onRadioChange('2')}
+				/>
+				<Text style={styles.subheaderText}>Slider</Text>
+				<Text style={styles.componentText}>Value: {this.state.sliderValue}</Text>
+				<CustomSlider
 					minValue={0}
 					maxValue={100}
-					onChange={this.onMultiSliderValuesChange}
-					values={this.state.multiSliderValues}
+					onChange={this.onSliderValueChange}
+					values={this.state.sliderValue}
 				/>
 				<Text style={styles.subheaderText}>Bottom Tab Bar</Text>
 				<BottomTabBar />

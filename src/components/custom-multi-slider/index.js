@@ -1,6 +1,7 @@
 // @flow
 import React from 'react';
 import { Switch } from 'react-native';
+// import {} from ''
 import { COLORS } from 'theme';
 
 const CustomSwitch = props => (
