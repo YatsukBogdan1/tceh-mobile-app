@@ -12,13 +12,14 @@ import baseStyles from 'components/base/styles';
 
 type Props = {
 	containerStyle?: Object,
-	label: string,
 	disabled?: boolean,
-	onPress: () => void,
-	style?: Object,
+	label: string,
+	labelStyle?: Object,
 	LeftIconComponent?: Function,
-	RightIconComponent?: Function,
+	onPress: () => void,
 	outlined: boolean,
+	RightIconComponent?: Function,
+	style?: Object,
 };
 
 class CustomButton extends React.Component<Props> {
@@ -47,6 +48,7 @@ class CustomButton extends React.Component<Props> {
 			containerStyle,
 			disabled,
 			label,
+			labelStyle,
 			LeftIconComponent,
 			onPress,
 			RightIconComponent,
@@ -61,7 +63,7 @@ class CustomButton extends React.Component<Props> {
 					style={[this.containerStyle, style]}
 				>
 					<LeftIconComponent />
-					<Text style={this.labelStyle}>{label}</Text>
+					<Text style={[this.labelStyle, labelStyle]}>{label}</Text>
 					<RightIconComponent />
 				</TouchableOpacity>
 			</View>
@@ -70,12 +72,13 @@ class CustomButton extends React.Component<Props> {
 }
 
 CustomButton.defaultProps = {
+	containerStyle: {},
 	disabled: false,
 	LeftIconComponent: () => null,
-	RightIconComponent: () => null,
-	containerStyle: {},
-	style: {},
 	outlined: false,
+	RightIconComponent: () => null,
+	style: {},
+	labelStyle: {},
 };
 
 export default CustomButton;

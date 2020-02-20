@@ -1,2 +1,3 @@
 export const TEMPLATE_SCREEN = 'TEMPLATE_SCREEN';
 export const UI_KIT_DEMO_SCREEN = 'UI_KIT_DEMO_SCREEN';
+export const INTRO_SCREEN = 'INTRO_SCREEN';

@@ -1,12 +1,9 @@
 // @flow
 import React from 'react';
-import {
-	Text,
-	View,
-	TouchableOpacity,
-} from 'react-native';
+import { View } from 'react-native';
 import styles from './styles';
 import CustomButton from 'components/custom-button';
+import Link from '../link-button';
 
 type Props = {
 	linkLabel: string,
@@ -26,11 +23,12 @@ class Footer extends React.Component<Props> {
 
 		return (
 			<View style={styles.container}>
-				<TouchableOpacity onPress={onLinkPress}>
-					<Text style={styles.linkLabel}>{linkLabel}</Text>
-				</TouchableOpacity>
+				<Link
+					label={linkLabel}
+					onPress={onLinkPress}
+				/>
 				<CustomButton
-					style={{ width: 170 }}
+					style={styles.button}
 					onPress={onButtonPress}
 					label={buttonLabel}
 				/>

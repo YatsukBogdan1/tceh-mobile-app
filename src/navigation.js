@@ -6,6 +6,7 @@ import store from 'store';
 import * as SCREENS from 'constants/screens';
 import TemplateScreen from 'screens/template-screen';
 import UiKitDemoScreen from 'screens/ui-kit-demo';
+import IntroScreen from 'screens/intro';
 
 const styles = StyleSheet.create({
 	container: {
@@ -22,4 +23,5 @@ const wrapWithSafeAreaView = Component => props => (
 export const registerScreens = () => {
 	Navigation.registerComponentWithRedux(SCREENS.TEMPLATE_SCREEN, () => wrapWithSafeAreaView(TemplateScreen), Provider, store);
 	Navigation.registerComponent(SCREENS.UI_KIT_DEMO_SCREEN, () => wrapWithSafeAreaView(UiKitDemoScreen));
+	Navigation.registerComponent(SCREENS.INTRO_SCREEN, () => IntroScreen);
 };

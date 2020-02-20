@@ -1,8 +1,5 @@
 import { StyleSheet } from 'react-native';
-import {
-	COLORS,
-	FONT_WEIGHTS,
-} from 'theme';
+import { COLORS } from 'theme';
 import styles from 'components/base/styles';
 
 export default StyleSheet.create({
@@ -15,9 +12,7 @@ export default StyleSheet.create({
 		paddingHorizontal: 30,
 		backgroundColor: COLORS.WHITE
 	},
-	linkLabel: {
-		...styles.regularText,
-		fontWeight: FONT_WEIGHTS.semiBold,
-		textDecorationLine: 'underline',
+	button: {
+		width: 170,
 	},
 });

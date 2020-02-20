@@ -9,6 +9,7 @@ export const COLORS = {
 	MAIN_ORANGE_COLOR: 'rgba(255, 99, 0, 1.0)',
 	MAIN_ORANGE_COLOR_TRANSPARENT: 'rgba(255, 99, 0, 0.25)',
 	RED_COLOR: 'rgba(255, 15, 0, 1.0)',
+	TRANSPARENT: 'transparent',
 	WHITE: 'rgba(255, 255, 255, 1.0)',
 };
 

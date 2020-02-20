@@ -21,7 +21,7 @@ export default StyleSheet.create({
 	optionsContainer: {
 		zIndex: -1,
 		borderWidth: 1,
-		borderTopColor: 'transparent',
+		borderTopColor: COLORS.TRANSPARENT,
 		borderBottomColor: COLORS.LIGHT_GREY,
 		borderLeftColor: COLORS.LIGHT_GREY,
 		borderRightColor: COLORS.LIGHT_GREY,
