@@ -11,6 +11,7 @@ export const COLORS = {
 	RED_COLOR: 'rgba(255, 15, 0, 1.0)',
 	TRANSPARENT: 'transparent',
 	WHITE: 'rgba(255, 255, 255, 1.0)',
+	YELLOW: 'rgba(255, 189, 47, 1.0)',
 };
 
 export const FONT_WEIGHTS = {

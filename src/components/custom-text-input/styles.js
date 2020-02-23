@@ -6,4 +6,14 @@ export default StyleSheet.create({
 		height: 48,
 		padding: 0,
 	},
+	secureTextEntryButtonContainer: {
+		position: 'absolute',
+		right: 5,
+	},
+	secureTextEntryButton: {
+		height: 40,
+		width: 40,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 });

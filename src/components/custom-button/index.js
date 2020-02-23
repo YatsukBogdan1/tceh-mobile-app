@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { ComponentType } from 'react';
 import {
 	Text,
 	View,
@@ -15,10 +15,11 @@ type Props = {
 	disabled?: boolean,
 	label: string,
 	labelStyle?: Object,
-	LeftIconComponent?: Function,
+	LeftIconComponent?: ComponentType,
+	onLayout?: () => void,
 	onPress: () => void,
 	outlined: boolean,
-	RightIconComponent?: Function,
+	RightIconComponent?: ComponentType,
 	style?: Object,
 };
 
@@ -30,6 +31,7 @@ class CustomButton extends React.Component<Props> {
 				...baseStyles.shadowBox,
 				opacity: this.props.disabled ? 0.5 : 1,
 				backgroundColor: this.props.outlined ? COLORS.WHITE : COLORS.MAIN_ORANGE_COLOR,
+				borderColor: this.props.outlined ? COLORS.LIGHT_GREY : COLORS.TRANSPARENT,
 			},
 		);
 	}
@@ -50,21 +52,25 @@ class CustomButton extends React.Component<Props> {
 			label,
 			labelStyle,
 			LeftIconComponent,
+			onLayout,
 			onPress,
 			RightIconComponent,
 			style,
 		} = this.props;
 
 		return (
-			<View style={containerStyle}>
+			<View
+				onLayout={onLayout}
+				style={containerStyle}
+			>
 				<TouchableOpacity
 					onPress={onPress}
 					disabled={disabled}
 					style={[this.containerStyle, style]}
 				>
-					<LeftIconComponent />
+					{LeftIconComponent}
 					<Text style={[this.labelStyle, labelStyle]}>{label}</Text>
-					<RightIconComponent />
+					{RightIconComponent}
 				</TouchableOpacity>
 			</View>
 		);
@@ -72,11 +78,12 @@ class CustomButton extends React.Component<Props> {
 }
 
 CustomButton.defaultProps = {
+	onLayout: () => false,
 	containerStyle: {},
 	disabled: false,
-	LeftIconComponent: () => null,
+	LeftIconComponent: null,
 	outlined: false,
-	RightIconComponent: () => null,
+	RightIconComponent: null,
 	style: {},
 	labelStyle: {},
 };

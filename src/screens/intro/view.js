@@ -1,22 +1,25 @@
 import React from 'react';
 import {
+	Animated,
+	Easing,
+	Image,
+	Keyboard,
+	StyleSheet,
 	Text,
 	View,
-	Image,
-	Animated,
-	StyleSheet,
 } from 'react-native';
 import IMAGE_ASSETS from 'assets/images';
 import styles from './styles';
 import Swiper from 'react-native-swiper';
-import { COLORS } from '../../theme';
-import Link from '../../components/link-button';
-import CustomButton from '../../components/custom-button';
-import {
-	BUTTONS_CONTAINER_HIDDEN_BOTTOM,
-	BUTTONS_CONTAINER_HIDDEN_OPACITY,
-	BUTTONS_CONTAINER_VISIBLE_BOTTOM, BUTTONS_CONTAINER_VISIBLE_OPACITY,
-} from './constants';
+import { COLORS } from 'theme';
+import Link from 'components/link-button';
+import CustomButton from 'components/custom-button';
+import { ANIMATION_VALUES } from './constants';
+import RegistrationForm from './components/registration-form';
+import LoginForm from './components/login-form';
+import ForgotPasswordForm from './components/forgot-password-form';
+import NewPasswordForm from './components/new-password-form';
+import SmsCodeForm from './components/sms-code-form';
 
 const slides = [{
 	text: 'TCEH - это полностью готовые для работы офисы класса А в самом центре Киева.',
@@ -29,29 +32,140 @@ const slides = [{
 	image: IMAGE_ASSETS.OFFICE_PHOTO_3,
 }];
 
-class ScreenName extends React.Component {
-	state = {
-		buttonsContainerBottom: new Animated.Value(BUTTONS_CONTAINER_HIDDEN_BOTTOM),
-		buttonsContainerOpacity: new Animated.Value(BUTTONS_CONTAINER_HIDDEN_OPACITY),
+const animationConfig = {
+	duration: 400,
+	easing: Easing.quad,
+};
+
+class IntroScreen extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			authorizationContainerTop: new Animated.Value(ANIMATION_VALUES.AUTHORIZATION_CONTAINER.VISIBLE.KEYBOARD_HIDDEN_TOP),
+			buttonsContainerBottom: new Animated.Value(ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.HIDDEN.BOTTOM),
+			buttonsContainerOpacity: new Animated.Value(ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.HIDDEN.OPACITY),
+			logoHeight: new Animated.Value(ANIMATION_VALUES.LOGO.AUTH_PAGE.HEIGHT),
+			logoTop: new Animated.Value(ANIMATION_VALUES.LOGO.AUTH_PAGE.KEYBOARD_HIDDEN_TOP),
+			rootSwiperScrollEnabled: false,
+			smsCodeFormOpened: false,
+		};
+	}
+
+	animateValues (animations) {
+		const _animations = [];
+		animations.forEach(animation => {
+			Animated.timing(animation.instance).stop();
+			_animations.push(Animated.timing(animation.instance, {
+				toValue: animation.toValue,
+				...animationConfig,
+			}));
+		});
+		Animated.parallel(_animations).start();
+	}
+
+	componentDidMount() {
+		this.keyboardWillShowListener = Keyboard.addListener(
+			'keyboardWillShow',
+			this._keyboardWillShow,
+		);
+		this.keyboardWillHideListener = Keyboard.addListener(
+			'keyboardWillHide',
+			this._keyboardWillHide,
+		);
+	}
+
+	componentWillUnmount() {
+		this.keyboardWillShowListener.remove();
+		this.keyboardWillHideListener.remove();
+	}
+
+	_keyboardWillShow = () => {
+		this.animateValues([{
+			instance: this.state.authorizationContainerTop,
+			toValue: ANIMATION_VALUES.AUTHORIZATION_CONTAINER.VISIBLE.KEYBOARD_VISIBLE_TOP
+		}, {
+			instance: this.state.logoTop,
+			toValue: ANIMATION_VALUES.LOGO.AUTH_PAGE.KEYBOARD_VISIBLE_TOP,
+		}]);
+	};
+
+	_keyboardWillHide = () => {
+		this.animateValues([{
+			instance: this.state.authorizationContainerTop,
+			toValue: ANIMATION_VALUES.AUTHORIZATION_CONTAINER.VISIBLE.KEYBOARD_HIDDEN_TOP
+		}, {
+			instance: this.state.logoTop,
+			toValue: ANIMATION_VALUES.LOGO.AUTH_PAGE.KEYBOARD_HIDDEN_TOP,
+		}]);
+	};
+
+	formScrollBy = index => this.formsSwiper.scrollBy(index, true);
+
+	scrollToRegistrationFromLogin = () => this.formScrollBy(-1);
+
+	scrollToLoginFromRegistration = () => this.formScrollBy(1);
+
+	scrollToForgotPasswordFromLogin = () => this.formScrollBy(1);
+
+	scrollToSmsCodeFromRegistration = () => {
+		this.smsCodeForm.focusSmsCodeInput();
+		this.formScrollBy(3);
+	};
+	scrollToSmsCodeFromForgotPassword = () => {
+		this.smsCodeForm.focusSmsCodeInput();
+		this.formScrollBy(1);
+	};
+
+	scrollToNewPasswordFromSmsCode = () => this.formScrollBy(1);
+
+	showAuthorizationContainer = () => {
+		this.setState({ rootSwiperScrollEnabled: false });
+		this.animateValues([
+			...this.logoToTopAnimations,
+			{
+				instance: this.state.authorizationContainerTop,
+				toValue: ANIMATION_VALUES.AUTHORIZATION_CONTAINER.VISIBLE.KEYBOARD_HIDDEN_TOP,
+			},
+		]);
+	};
+
+	get logoToTopAnimations () {
+		return [{
+			instance: this.state.logoTop,
+			toValue: ANIMATION_VALUES.LOGO.AUTH_PAGE.KEYBOARD_HIDDEN_TOP,
+		}, {
+			instance: this.state.logoHeight,
+			toValue: ANIMATION_VALUES.LOGO.AUTH_PAGE.HEIGHT,
+		}];
+	}
+
+	onRegistrationPress = () => {
+		this.showAuthorizationContainer();
+	};
+
+	onLoginPress = () => {
+		this.showAuthorizationContainer();
 	};
 
 	showButtons = () => {
-		Animated.timing(this.state.buttonsContainerBottom).stop();
-		Animated.timing(this.state.buttonsContainerOpacity).stop();
-		Animated.parallel([
-			Animated.timing(this.state.buttonsContainerBottom, { toValue: BUTTONS_CONTAINER_VISIBLE_BOTTOM }),
-			Animated.timing(this.state.buttonsContainerOpacity, { toValue: BUTTONS_CONTAINER_VISIBLE_OPACITY }),
-		]).start();
+		this.animateValues([{
+			instance: this.state.buttonsContainerBottom,
+			toValue: ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.VISIBLE.BOTTOM,
+		}, {
+			instance: this.state.buttonsContainerOpacity,
+			toValue: ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.VISIBLE.OPACITY,
+		}]);
 	};
 
 	hideButtons = () => {
-		Animated.timing(this.state.buttonsContainerBottom).stop();
-		Animated.timing(this.state.buttonsContainerOpacity).stop();
-
-		Animated.parallel([
-			Animated.timing(this.state.buttonsContainerBottom, { toValue: BUTTONS_CONTAINER_HIDDEN_BOTTOM }),
-			Animated.timing(this.state.buttonsContainerOpacity, { toValue: BUTTONS_CONTAINER_HIDDEN_OPACITY }),
-		]).start();
+		this.animateValues([{
+			instance: this.state.buttonsContainerBottom,
+			toValue: ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.HIDDEN.BOTTOM,
+		}, {
+			instance: this.state.buttonsContainerOpacity,
+			toValue: ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.HIDDEN.OPACITY,
+		}]);
 	};
 
 	onRootSwiperIndexChanged = index => {
@@ -75,6 +189,16 @@ class ScreenName extends React.Component {
 		}, 1000);
 	};
 
+	get logoStyle () {
+		return StyleSheet.compose(
+			styles.logo,
+			{
+				height: this.state.logoHeight,
+				top: this.state.logoTop,
+			}
+		);
+	}
+
 	get buttonsContainerStyle () {
 		return StyleSheet.compose(
 			styles.authorizationButtonsContainer,
@@ -85,24 +209,38 @@ class ScreenName extends React.Component {
 		);
 	}
 
+	get authorizationContainerStyle () {
+		return StyleSheet.compose(
+			styles.authorizationContainer,
+			{
+				top: this.state.authorizationContainerTop,
+			}
+		);
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
-				<Image style={styles.logo} source={IMAGE_ASSETS.LOGO}/>
+				<Animated.Image
+					resizeMode='contain'
+					source={IMAGE_ASSETS.LOGO}
+					style={this.logoStyle}
+				/>
 				<Swiper
-					ref={_ref => this.rootSwiper = _ref}
-					showsPagination={false}
-					onIndexChanged={this.onRootSwiperIndexChanged}
-					style={styles.swiperContainer}
 					loop={false}
+					onIndexChanged={this.onRootSwiperIndexChanged}
+					ref={_ref => this.rootSwiper = _ref}
+					scrollEnabled={this.state.rootSwiperScrollEnabled}
+					showsPagination={false}
+					style={styles.swiperContainer}
 				>
 					<Swiper
-						ref={_ref => this.childSwiper = _ref}
-						style={styles.swiperContainer}
-						paginationStyle={styles.paginationStyle}
-						loop={false}
 						activeDotColor={COLORS.MAIN_ORANGE_COLOR}
 						dotColor={COLORS.WHITE}
+						loop={false}
+						paginationStyle={styles.paginationStyle}
+						ref={_ref => this.childSwiper = _ref}
+						style={styles.swiperContainer}
 					>
 						{slides.map(slide => (
 							<View style={styles.cardContainer}>
@@ -125,21 +263,45 @@ class ScreenName extends React.Component {
 						<Animated.View style={this.buttonsContainerStyle}>
 							<CustomButton
 								label='Регистрация'
-								onPress={() => false}
+								onPress={this.onRegistrationPress}
 								containerStyle={styles.registrationButtonContainer}
 							/>
 							<CustomButton
 								label='Вход'
 								style={styles.loginButton}
 								labelStyle={styles.loginButtonLabel}
-								onPress={() => false}
+								onPress={this.onLoginPress}
 							/>
 						</Animated.View>
 					</View>
 				</Swiper>
+				<Animated.View style={this.authorizationContainerStyle}>
+					<Swiper
+						ref={_ref => this.formsSwiper = _ref}
+						scrollEnabled={false}
+						showsPagination={false}
+					>
+						<RegistrationForm
+							navigateToLogin={this.scrollToLoginFromRegistration}
+							navigateToSmsCode={this.scrollToSmsCodeFromRegistration}
+						/>
+						<LoginForm
+							navigateToForgotPassword={this.scrollToForgotPasswordFromLogin}
+							navigateToRegistration={this.scrollToRegistrationFromLogin}
+						/>
+						<ForgotPasswordForm
+							navigateToSmsCode={this.scrollToSmsCodeFromForgotPassword}
+						/>
+						<SmsCodeForm
+							navigateToNewPassword={this.scrollToNewPasswordFromSmsCode}
+							ref={_ref => this.smsCodeForm = _ref}
+						/>
+						<NewPasswordForm />
+					</Swiper>
+				</Animated.View>
 			</View>
 		);
 	}
 }
 
-export default ScreenName;
+export default IntroScreen;

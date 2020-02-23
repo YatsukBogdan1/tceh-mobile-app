@@ -23,5 +23,5 @@ const wrapWithSafeAreaView = Component => props => (
 export const registerScreens = () => {
 	Navigation.registerComponentWithRedux(SCREENS.TEMPLATE_SCREEN, () => wrapWithSafeAreaView(TemplateScreen), Provider, store);
 	Navigation.registerComponent(SCREENS.UI_KIT_DEMO_SCREEN, () => wrapWithSafeAreaView(UiKitDemoScreen));
-	Navigation.registerComponent(SCREENS.INTRO_SCREEN, () => IntroScreen);
+	Navigation.registerComponentWithRedux(SCREENS.INTRO_SCREEN, () => IntroScreen, Provider, store);
 };

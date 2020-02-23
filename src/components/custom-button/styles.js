@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import {COLORS, FONT_WEIGHTS} from 'theme';
+import { COLORS, FONT_WEIGHTS } from 'theme';
 import styles from 'components/base/styles';
 
 export default StyleSheet.create({
@@ -10,10 +10,11 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: COLORS.MAIN_ORANGE_COLOR,
+		borderWidth: 1,
 	},
 	label: {
 		...styles.defaultText,
-		marginHorizontal: 15,
+		marginHorizontal: 10,
 		textTransform: 'uppercase',
 		fontWeight: FONT_WEIGHTS.semiBold,
 		letterSpacing: 1,

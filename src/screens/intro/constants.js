@@ -1,7 +1,38 @@
-export const BUTTONS_CONTAINER_HEIGHT = 200;
+import { Dimensions } from 'react-native';
 
-export const BUTTONS_CONTAINER_VISIBLE_BOTTOM = 0;
-export const BUTTONS_CONTAINER_HIDDEN_BOTTOM = -1 * BUTTONS_CONTAINER_HEIGHT;
+const { height } = Dimensions.get('window');
 
-export const BUTTONS_CONTAINER_VISIBLE_OPACITY = 1;
-export const BUTTONS_CONTAINER_HIDDEN_OPACITY = 0;
+export const ANIMATION_VALUES = {
+	AUTHORIZATION_CONTAINER: {
+		HEIGHT: 1500,
+		VISIBLE: {
+			KEYBOARD_HIDDEN_TOP: 170,
+			KEYBOARD_VISIBLE_TOP: 80,
+		},
+		HIDDEN: {
+			TOP: height,
+		},
+	},
+	LOGO: {
+		INTRO_PAGE: {
+			TOP: height * 0.25,
+			HEIGHT: 100,
+		},
+		AUTH_PAGE: {
+			HEIGHT: 60,
+			KEYBOARD_HIDDEN_TOP: 60,
+			KEYBOARD_VISIBLE_TOP: -200,
+		},
+	},
+	AUTH_BUTTONS_CONTAINER: {
+		HEIGHT: height * 0.3,
+		VISIBLE: {
+			BOTTOM: 0,
+			OPACITY: 1,
+		},
+		HIDDEN: {
+			BOTTOM: height * -0.3,
+			OPACITY: 1,
+		},
+	},
+};

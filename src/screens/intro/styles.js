@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import styles from 'components/base/styles';
-import { COLORS } from '../../theme';
-import { BUTTONS_CONTAINER_HEIGHT } from './constants';
+import { COLORS } from 'theme';
+import { ANIMATION_VALUES } from './constants';
 const { width, height } = Dimensions.get('window');
 
 const imageContainer = {
@@ -41,7 +41,6 @@ export default StyleSheet.create({
 	logo: {
 		zIndex: 100,
 		position: 'absolute',
-		top: height * 0.3,
 		marginBottom: 50,
 	},
 	text: {
@@ -76,8 +75,17 @@ export default StyleSheet.create({
 		zIndex: 100,
 		paddingHorizontal: 30,
 		left: 0,
-		height: BUTTONS_CONTAINER_HEIGHT,
+		height: ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.HEIGHT,
 		position: 'absolute',
 		width,
+	},
+	authorizationContainer: {
+		borderTopLeftRadius: 45,
+		borderTopRightRadius: 45,
+		backgroundColor: COLORS.WHITE,
+		height: ANIMATION_VALUES.AUTHORIZATION_CONTAINER.HEIGHT,
+		width: width,
+		position: 'absolute',
+		left: 0,
 	},
 });

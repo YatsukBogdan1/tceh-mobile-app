@@ -14,17 +14,17 @@ type Props = {
 	textStyle?: Object,
 };
 
-const Link = (props: Props) => (
-	<View style={props.containerStyle}>
+const LinkButton = (props: Props) => (
+	<View style={[props.containerStyle, styles.container]}>
 		<TouchableOpacity style={styles.touchableArea} onPress={props.onPress}>
 			<Text style={[styles.label, props.textStyle]}>{props.label}</Text>
 		</TouchableOpacity>
 	</View>
 );
 
-Link.defaultProps = {
+LinkButton.defaultProps = {
 	containerStyle: {},
 	textStyle: {},
 };
 
-export default Link;
+export default LinkButton;
