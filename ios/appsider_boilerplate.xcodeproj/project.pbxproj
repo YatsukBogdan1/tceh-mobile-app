@@ -20,6 +20,7 @@
 		94CBBBBDA6DEE73EDFE02F19 /* libPods-appsider_boilerplateTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D30A9F29C05C163F041F0A57 /* libPods-appsider_boilerplateTests.a */; };
 		9D72E6EFCEDE0CC41D766FCF /* libPods-appsider_boilerplate-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B847AFAD6EBDDE2D3C046F53 /* libPods-appsider_boilerplate-tvOS.a */; };
 		CCCC700050DEA84A73046931 /* libPods-appsider_boilerplate-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5803F16E435D6F14915F56EB /* libPods-appsider_boilerplate-tvOSTests.a */; };
+		F7628DDFA1B74A5AB9714099 /* fontello.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B79D280236D94D80A3454CC3 /* fontello.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +84,7 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F2106B68C5E943DDB45F1EE7 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		B79D280236D94D80A3454CC3 /* fontello.ttf */ = {isa = PBXFileReference; name = "fontello.ttf"; path = "../src/assets/fonts/fontello.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -233,6 +235,7 @@
 				5234D45FE8974A4B9FA84ECB /* Octicons.ttf */,
 				76645AD173114D8FB5ADDE49 /* SimpleLineIcons.ttf */,
 				E7B216D9771A40D8A4A0513C /* Zocial.ttf */,
+				B79D280236D94D80A3454CC3 /* fontello.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				F7628DDFA1B74A5AB9714099 /* fontello.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

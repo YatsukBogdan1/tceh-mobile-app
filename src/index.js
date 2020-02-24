@@ -24,5 +24,17 @@ export const start = () => {
 				},
 			},
 		});
+		// Navigation.setRoot({
+		// 	root: {
+		// 		component: {
+		// 			name: SCREENS.INTRO_SCREEN,
+		// 			options: {
+		// 				bottomTab: {
+		// 					text: 'Profile',
+		// 				},
+		// 			},
+		// 		},
+		// 	},
+		// });
 	});
 };
