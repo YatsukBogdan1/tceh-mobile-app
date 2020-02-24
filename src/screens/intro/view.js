@@ -42,12 +42,12 @@ class IntroScreen extends React.Component {
 		super(props);
 
 		this.state = {
-			authorizationContainerTop: new Animated.Value(ANIMATION_VALUES.AUTHORIZATION_CONTAINER.VISIBLE.KEYBOARD_HIDDEN_TOP),
+			authorizationContainerTop: new Animated.Value(ANIMATION_VALUES.AUTHORIZATION_CONTAINER.HIDDEN.TOP),
 			buttonsContainerBottom: new Animated.Value(ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.HIDDEN.BOTTOM),
 			buttonsContainerOpacity: new Animated.Value(ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.HIDDEN.OPACITY),
-			logoHeight: new Animated.Value(ANIMATION_VALUES.LOGO.AUTH_PAGE.HEIGHT),
-			logoTop: new Animated.Value(ANIMATION_VALUES.LOGO.AUTH_PAGE.KEYBOARD_HIDDEN_TOP),
-			rootSwiperScrollEnabled: false,
+			logoHeight: new Animated.Value(ANIMATION_VALUES.LOGO.INTRO_PAGE.HEIGHT),
+			logoTop: new Animated.Value(ANIMATION_VALUES.LOGO.INTRO_PAGE.TOP),
+			rootSwiperScrollEnabled: true,
 			smsCodeFormOpened: false,
 		};
 	}
