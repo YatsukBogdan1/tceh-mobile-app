@@ -10,8 +10,17 @@ export const start = () => {
 	Navigation.events().registerAppLaunchedListener(() => {
 		Navigation.setRoot({
 			root: {
-				component: {
-					name: SCREENS.INTRO_SCREEN,
+				bottomTabs: {
+					children: [{
+						component: {
+							name: SCREENS.PROFILE_SCREEN,
+							options: {
+								bottomTab: {
+									text: 'Profile',
+								},
+							},
+						},
+					}],
 				},
 			},
 		});

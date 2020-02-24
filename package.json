@@ -2,6 +2,9 @@
   "name": "appsider_boilerplate",
   "version": "0.0.1",
   "private": true,
+  "rnpm": {
+    "assets": ["src/assets/fonts"]
+  },
   "scripts": {
     "android": "cd ./android && ./gradlew clean &&./gradlew app:assembleDebug && ./gradlew installDebug",
     "ios": "react-native run-ios",
