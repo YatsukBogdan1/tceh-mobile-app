@@ -24,6 +24,9 @@ export const start = () => {
 				},
 			},
 		});
+
+		// uncomment to see intro
+
 		// Navigation.setRoot({
 		// 	root: {
 		// 		component: {
