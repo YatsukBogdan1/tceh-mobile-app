@@ -1,6 +1,7 @@
 import React from 'react';
 import {
 	FlatList,
+	TouchableOpacity,
 	View,
 } from 'react-native';
 import styles from './styles';
@@ -8,10 +9,11 @@ import { Navigation } from 'react-native-navigation';
 import * as SCREENS from 'constants/screens';
 import UserBlock from './components/user-block';
 import ProfileButton from './components/profile-button';
-import Icon from 'tceh-vector-icons';
+import Icon from 'react-native-vector-icons/dist/Ionicons';
+import { COLORS } from 'theme';
 
 const buttons = [{
-	screen: SCREENS.PROFILE_SCREEN,
+	screen: SCREENS.PERSONAL_INFO,
 	label: 'Личные данные',
 	icon: 'personal-data',
 }, {
@@ -38,11 +40,13 @@ const buttons = [{
 
 class ProfileScreen extends React.Component {
 	pushScreen = screen => {
+		console.log(screen);
+		console.log(this.props);
 		Navigation.push(this.props.componentId, {
 			component: {
 				name: screen,
 			},
-		});
+		}).then(res => console.log(res));
 	};
 
 	renderItem = ({ item }) => (
@@ -52,6 +56,10 @@ class ProfileScreen extends React.Component {
 			onPress={() => this.pushScreen(item.screen)}
 		/>
 	);
+
+	onLogoutPress = () => {
+		//
+	};
 
 	render() {
 		return (
@@ -68,6 +76,16 @@ class ProfileScreen extends React.Component {
 					renderItem={this.renderItem}
 					style={styles.list}
 				/>
+				<TouchableOpacity
+					onPress={this.onLogoutPress}
+					style={styles.logoutButton}
+				>
+					<Icon
+						color={COLORS.DARK_GREY}
+						name='ios-log-out'
+						size={25}
+					/>
+				</TouchableOpacity>
 			</View>
 		);
 	}

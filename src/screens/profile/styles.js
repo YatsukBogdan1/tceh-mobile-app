@@ -14,4 +14,13 @@ export default StyleSheet.create({
 	list: {
 		flex: 1,
 	},
+	logoutButton: {
+		position: 'absolute',
+		top: 20,
+		right: 20,
+		height: 40,
+		width: 40,
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
 });

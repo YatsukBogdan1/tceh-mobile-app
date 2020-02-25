@@ -31,7 +31,55 @@ export type AuthorizationFormState = {
 	},
 };
 
+export type PersonalInfoFormState = {
+	values: {
+		about: string,
+		birthday: string,
+		companyId: ?string,
+		email: string,
+		facebookURL: string,
+		instagramURL: string,
+		interests: string,
+		isPrivate: boolean,
+		linkedInURL: string,
+		name: string,
+		phone: string,
+		position: string,
+		skills: string,
+		surname: string,
+	},
+	pristine: {
+		about: boolean,
+		birthday: boolean,
+		email: boolean,
+		facebookURL: boolean,
+		instagramURL: boolean,
+		interests: boolean,
+		linkedInURL: boolean,
+		name: boolean,
+		phone: boolean,
+		position: boolean,
+		skills: boolean,
+		surname: boolean,
+	},
+	errors: {
+		about: ?string,
+		birthday: ?string,
+		email: ?string,
+		facebookURL: ?string,
+		instagramURL: ?string,
+		interests: ?string,
+		linkedInURL: ?string,
+		name: ?string,
+		phone: ?string,
+		position: ?string,
+		skills: ?string,
+		surname: ?string,
+	},
+}
+
 export type State = {
-	registrationForm: RegistrationFormState,
 	authorizationForm: AuthorizationFormState,
+	personalInfoForm: PersonalInfoFormState,
+	registrationForm: RegistrationFormState,
 };

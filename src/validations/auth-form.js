@@ -1,25 +1,10 @@
-const validateName = value => {
-	if (value.length === 0) {
-		return 'Введите имя';
-	}
-	return null;
-};
+import {
+	validateName,
+	validatePassword,
+	validatePhone,
+} from './common';
 
-const validatePhone = value => {
-	if (value.length === 0) {
-		return 'Введите телефон';
-	}
-	return null;
-};
-
-const validatePassword = value => {
-	if (value.length === 0) {
-		return 'Введите пароль';
-	}
-	return null;
-};
-
-export const validateField = (field, value) => {
+export const validateAuthFormField = (field, value) => {
 	switch (field) {
 		case 'name':
 			return validateName(value);

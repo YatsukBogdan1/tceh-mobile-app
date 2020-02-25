@@ -7,8 +7,8 @@ import type { AuthorizationFormState } from 'flow/types';
 
 const initialState = {
 	values: {
-		phone: '',
-		password: '',
+		name: '',
+		surname: '',
 	},
 	pristine: {
 		phone: true,

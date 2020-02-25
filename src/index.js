@@ -12,11 +12,20 @@ export const start = () => {
 			root: {
 				bottomTabs: {
 					children: [{
-						component: {
-							name: SCREENS.PROFILE_SCREEN,
+						stack: {
+							children: [{
+								component: {
+									name: SCREENS.PROFILE_SCREEN,
+									options: {
+										bottomTab: {
+											text: 'Profile',
+										},
+									},
+								},
+							}],
 							options: {
-								bottomTab: {
-									text: 'Profile',
+								topBar: {
+									visible: false,
 								},
 							},
 						},

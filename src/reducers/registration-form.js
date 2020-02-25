@@ -2,10 +2,10 @@ import {
 	SET_FIELD_VALUE,
 	SET_FIELD_PRISTINE,
 } from 'actions/registration';
-import { validateField } from 'validations/auth-form';
+import { validateAuthFormField } from 'validations/auth-form';
 import type { RegistrationFormState } from 'flow/types';
 
-const initialState = {
+const initialState: RegistrationFormState = {
 	values: {
 		name: '',
 		phone: '',
@@ -23,7 +23,7 @@ const initialState = {
 	},
 };
 
-const registrationForm = (state: RegistrationFormState = initialState, action) => {
+const registrationForm = (state: RegistrationFormState = initialState, action): RegistrationFormState => {
 	switch (action.type) {
 		case SET_FIELD_VALUE:
 			return {
@@ -34,7 +34,7 @@ const registrationForm = (state: RegistrationFormState = initialState, action) =
 				},
 				errors: {
 					...state.errors,
-					[action.payload.field]: validateField(action.payload.field, action.payload.value),
+					[action.payload.field]: validateAuthFormField(action.payload.field, action.payload.value),
 				},
 			};
 		case SET_FIELD_PRISTINE:
