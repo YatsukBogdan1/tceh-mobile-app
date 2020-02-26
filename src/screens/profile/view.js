@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import {
 	FlatList,
@@ -11,42 +13,48 @@ import UserBlock from './components/user-block';
 import ProfileButton from './components/profile-button';
 import Icon from 'react-native-vector-icons/dist/Ionicons';
 import { COLORS } from 'theme';
+import type { UserState } from 'flow/types';
+import { getPersonalInfoFormValuesFromUserState } from 'utils';
+
+type Props = {
+	initFormValues: (values: Array) => void,
+	user: UserState,
+}
 
 const buttons = [{
 	screen: SCREENS.PERSONAL_INFO,
 	label: 'Личные данные',
 	icon: 'personal-data',
-}, {
-	screen: SCREENS.PROFILE_SCREEN,
-	label: 'Мои события',
-	icon: 'calendar',
-}, {
-	screen: SCREENS.PROFILE_SCREEN,
-	label: 'Платежная информация',
-	icon: 'wallet',
-}, {
-	screen: SCREENS.PROFILE_SCREEN,
-	label: 'Сохраненное',
-	icon: 'heart',
-}, {
-	screen: SCREENS.PROFILE_SCREEN,
-	label: 'Привилегии',
-	icon: 'flyers',
-}, {
-	screen: SCREENS.PROFILE_SCREEN,
-	label: 'Настройки',
-	icon: 'gear',
+// }, {
+// 	screen: SCREENS.PROFILE_SCREEN,
+// 	label: 'Мои события',
+// 	icon: 'calendar',
+// }, {
+// 	screen: SCREENS.PROFILE_SCREEN,
+// 	label: 'Платежная информация',
+// 	icon: 'wallet',
+// }, {
+// 	screen: SCREENS.PROFILE_SCREEN,
+// 	label: 'Сохраненное',
+// 	icon: 'heart',
+// }, {
+// 	screen: SCREENS.PROFILE_SCREEN,
+// 	label: 'Привилегии',
+// 	icon: 'flyers',
+// }, {
+// 	screen: SCREENS.PROFILE_SCREEN,
+// 	label: 'Настройки',
+// 	icon: 'gear',
 }];
 
-class ProfileScreen extends React.Component {
+class ProfileScreen extends React.Component<Props> {
 	pushScreen = screen => {
-		console.log(screen);
-		console.log(this.props);
+		this.props.initFormValues(getPersonalInfoFormValuesFromUserState(this.props.user));
 		Navigation.push(this.props.componentId, {
 			component: {
 				name: screen,
 			},
-		}).then(res => console.log(res));
+		});
 	};
 
 	renderItem = ({ item }) => (
@@ -62,12 +70,14 @@ class ProfileScreen extends React.Component {
 	};
 
 	render() {
+		const { user } = this.props;
+
 		return (
 			<View style={styles.container}>
 				<UserBlock
-					avatarURI='some-uri'
-					name='Антонина Ковальчук'
-					position='Brand Manager'
+					avatarURI={user.avatarURI}
+					name={`${user.name} ${user.surname}`}
+					position={user.position}
 				/>
 				<FlatList
 					data={buttons}

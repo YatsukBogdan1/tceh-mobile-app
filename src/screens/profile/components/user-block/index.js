@@ -6,7 +6,6 @@ import {
 	View,
 } from 'react-native';
 import styles from './styles';
-import IMAGE_ASSETS from 'assets/images';
 
 type Props = {
 	avatarURI: string,
@@ -19,7 +18,7 @@ class UserBlock extends React.Component<Props> {
 		return (
 			<View style={styles.container}>
 				<Image
-					source={IMAGE_ASSETS.PROFILE_AVATAR_DEMO}
+					source={this.props.avatarURI}
 					// source={{ uri: this.props.avatarURI }}
 					style={styles.avatar}
 					resizeMode='contain'

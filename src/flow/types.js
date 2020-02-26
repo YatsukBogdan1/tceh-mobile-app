@@ -31,6 +31,25 @@ export type AuthorizationFormState = {
 	},
 };
 
+export type UserState = {
+	about: string,
+	avatarURI: string,
+	birthday: string,
+	companyId: ?string,
+	email: string,
+	facebookURL: string,
+	instagramURL: string,
+	interests: string,
+	isPrivate: boolean,
+	linkedInURL: string,
+	name: string,
+	phone: string,
+	position: string,
+	skills: string,
+	surname: string,
+	events: Array<string>,
+};
+
 export type PersonalInfoFormState = {
 	values: {
 		about: string,

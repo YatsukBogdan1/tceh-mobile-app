@@ -4,10 +4,7 @@ import {
 	COLORS,
 	FONT_WEIGHTS, FONTS,
 } from 'theme';
-import {
-	TEXT_LEFT_PADDING,
-	LABEL_INNER_PADDING,
-} from './constants';
+import { LABEL_INNER_PADDING } from './constants';
 
 const container = {
 	height: 48,
@@ -56,5 +53,8 @@ export default StyleSheet.create({
 	errorIconContainer: {
 		position: 'absolute',
 		top: 15,
+	},
+	leftIconContainer: {
+		marginRight: 10,
 	},
 });

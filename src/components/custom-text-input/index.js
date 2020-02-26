@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { ComponentType } from 'react';
 import {
 	TextInput,
 	TouchableOpacity,
@@ -15,6 +15,8 @@ type Props = {
 	containerStyle?: Object,
 	error?: string,
 	label: string,
+	LeftIconComponent?: ComponentType,
+	multiline?: boolean,
 	onBlur?: () => void,
 	onChange: () => void,
 	onFocus?: () => void,
@@ -83,17 +85,36 @@ class CustomTextInput extends React.Component<Props> {
 		this.setState({ focused: false });
 	};
 
+	get textInputStyle () {
+		if (this.props.multiline) {
+			return [styles.textInput, this.props.style];
+		}
+		return [styles.textInput, this.props.style, { height: 48 }];
+	}
+
+	get contentContainerStyle () {
+		if (this.props.multiline) {
+			return {
+				minHeight: 48,
+				height: undefined,
+				paddingVertical: 13,
+			};
+		}
+		return {};
+	}
+
 	render() {
 		const {
 			containerStyle,
 			error,
 			label,
+			LeftIconComponent,
+			multiline,
 			onChange,
+			onSubmitEditing,
 			outlined,
 			returnKeyType,
-			style,
 			value,
-			onSubmitEditing,
 		} = this.props;
 
 		return (
@@ -103,9 +124,12 @@ class CustomTextInput extends React.Component<Props> {
 				error={error}
 				label={label}
 				labelPosition={this.labelPosition}
+				LeftIconComponent={LeftIconComponent}
 				outlined={outlined}
+				style={this.contentContainerStyle}
 			>
 				<TextInput
+					multiline={multiline}
 					onBlur={this.onBlur}
 					onChangeText={onChange}
 					onFocus={this.onFocus}
@@ -113,7 +137,7 @@ class CustomTextInput extends React.Component<Props> {
 					ref={_ref => this.input = _ref}
 					returnKeyType={returnKeyType}
 					secureTextEntry={this.state.secureTextEntry}
-					style={[styles.textInput, style]}
+					style={this.textInputStyle}
 					value={value}
 				/>
 				{this.props.secureTextEntry && (
@@ -138,6 +162,8 @@ class CustomTextInput extends React.Component<Props> {
 CustomTextInput.defaultProps = {
 	containerStyle: {},
 	error: null,
+	LeftIconComponent: null,
+	multiline: false,
 	onBlur: () => false,
 	onFocus: () => false,
 	onSubmitEditing: () => false,

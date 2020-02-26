@@ -1,6 +1,6 @@
 import {
 	SET_FIELD_VALUE,
-	SET_FIELD_PRISTINE,
+	SET_FIELD_PRISTINE, INIT_FORM_VALUES,
 } from 'actions/personal-info';
 import { validatePersonalInfoFormField } from 'validations/personal-info-form';
 import type { PersonalInfoFormState } from 'flow/types';
@@ -73,6 +73,11 @@ const personalInfoForm = (state: PersonalInfoFormState = initialState, action): 
 					...state.values,
 					[action.payload.field]: action.payload.pristine,
 				},
+			};
+		case INIT_FORM_VALUES:
+			return {
+				...initialState,
+				values: action.payload.values,
 			};
 		default:
 			return state;

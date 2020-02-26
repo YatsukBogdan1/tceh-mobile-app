@@ -6,10 +6,10 @@ import {
 	ERROR_TEXT_HIDDEN_TRANSLATE_Y,
 	ERROR_TEXT_VISIBLE_TRANSLATE_Y,
 	LABEL_CENTER_FONT_SIZE,
-	LABEL_CENTER_TRANSLATE_Y,
+	LABEL_CENTER_TRANSLATE_Y, LABEL_INNER_PADDING,
 	LABEL_STATE,
 	LABEL_TOP_FONT_SIZE,
-	LABEL_TOP_TRANSLATE_Y,
+	LABEL_TOP_TRANSLATE_Y, TEXT_LEFT_PADDING,
 } from './constants';
 import { COLORS } from 'theme';
 
@@ -54,6 +54,20 @@ export const getLabelTranslateY = props => {
 	}
 };
 
+export const getLabelTranslateX = props => {
+	const labelState = getLabelState(props);
+	const outlinedTranslateX = props.outlined ? TEXT_LEFT_PADDING - LABEL_INNER_PADDING : -5;
+	switch (labelState) {
+		case LABEL_STATE.TOP_ERROR:
+		case LABEL_STATE.TOP_ACTIVE:
+		case LABEL_STATE.TOP_INACTIVE:
+			return outlinedTranslateX;
+		default:
+		case LABEL_STATE.CENTER:
+			return props.LeftIconComponent ? outlinedTranslateX + 20 : outlinedTranslateX;
+	}
+};
+
 export const getLabelColor = props => {
 	const labelState = getLabelState(props);
 	switch (labelState) {
@@ -95,9 +109,10 @@ export const getContainerColor = props => {
 };
 
 export const getLabelAnimatedValues = props => ({
-	labelTranslateY: getLabelTranslateY(props),
-	labelFontSize: getLabelFontSize(props),
 	labelColor: getLabelColor(props),
+	labelFontSize: getLabelFontSize(props),
+	labelTranslateX: getLabelTranslateX(props),
+	labelTranslateY: getLabelTranslateY(props),
 });
 
 export const getContainerAnimatedValues = props => ({

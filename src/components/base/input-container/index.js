@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import React, { ComponentType } from 'react';
 import {
 	Animated,
 	StyleSheet,
@@ -14,8 +14,10 @@ import {
 	TEXT_LEFT_PADDING,
 } from './constants';
 import {
-	getAnimatedValues, getContainerAnimatedValues,
-	getContainerState, getErrorAnimatedValues,
+	getAnimatedValues,
+	getContainerAnimatedValues,
+	getContainerState,
+	getErrorAnimatedValues,
 	getLabelAnimatedValues,
 	getLabelState,
 } from './utils';
@@ -27,6 +29,7 @@ type Props = {
 	error?: string,
 	label: string,
 	labelPosition: string,
+	LeftIconComponent?: ComponentType,
 	onLayout?: () => void,
 	onPress?: () => void,
 	outlined?: boolean,
@@ -43,23 +46,25 @@ class InputContainer extends React.Component<Props> {
 		super(props);
 
 		const {
-			labelTranslateY,
-			labelColor,
-			labelFontSize,
 			containerColor,
 			errorIconTranslateX,
 			errorTextTranslateY,
+			labelColor,
+			labelFontSize,
+			labelTranslateX,
+			labelTranslateY,
 		} = getAnimatedValues(props);
 
 		this.state = {
-			error: null,
 			containerColor,
 			containerColorAnimationAnimatedValue: new Animated.Value(0),
+			error: null,
 			errorIconTranslateX: new Animated.Value(errorIconTranslateX),
 			errorTextTranslateY: new Animated.Value(errorTextTranslateY),
 			labelColor,
 			labelColorAnimationAnimatedValue: new Animated.Value(0),
 			labelFontSize: new Animated.Value(labelFontSize),
+			labelTranslateX: new Animated.Value(labelTranslateX),
 			labelTranslateY: new Animated.Value(labelTranslateY),
 			newContainerColor: containerColor,
 			newLabelColor: labelColor,
@@ -71,16 +76,19 @@ class InputContainer extends React.Component<Props> {
 			labelFontSize,
 			labelColor,
 			labelTranslateY,
+			labelTranslateX,
 		} = getLabelAnimatedValues(this.props);
 
 		Animated.timing(this.state.labelFontSize).stop();
 		Animated.timing(this.state.labelTranslateY).stop();
+		Animated.timing(this.state.labelTranslateX).stop();
 		Animated.timing(this.state.labelColorAnimationAnimatedValue).stop();
 
 		this.setState({ newLabelColor: labelColor }, () => {
 			Animated.parallel([
 				Animated.timing(this.state.labelFontSize, { toValue: labelFontSize, ...animationCommonConfig }),
 				Animated.timing(this.state.labelTranslateY, { toValue: labelTranslateY, ...animationCommonConfig }),
+				Animated.timing(this.state.labelTranslateX, { toValue: labelTranslateX, ...animationCommonConfig }),
 				Animated.timing(this.state.labelColorAnimationAnimatedValue, { toValue: 1, ...animationCommonConfig }),
 			]).start(() => {
 				this.setState({
@@ -129,8 +137,6 @@ class InputContainer extends React.Component<Props> {
 	};
 
 	get labelStyle() {
-		const translateX = this.props.outlined ? TEXT_LEFT_PADDING - LABEL_INNER_PADDING : -5;
-
 		return StyleSheet.compose(
 			styles.label,
 			{
@@ -141,22 +147,23 @@ class InputContainer extends React.Component<Props> {
 				fontSize: this.state.labelFontSize,
 				transform: [
 					{ translateY: this.state.labelTranslateY },
-					{ translateX },
+					{ translateX: this.state.labelTranslateX },
 				],
 			}
 		);
 	}
 
 	get containerStyle() {
-		return StyleSheet.compose(
+		return [
 			this.props.outlined ? styles.containerOutlined : styles.container,
 			{
 				borderColor: this.state.containerColorAnimationAnimatedValue.interpolate({
 					inputRange: [0, 1],
 					outputRange: [this.state.containerColor, this.state.newContainerColor],
 				}),
-			}
-		);
+			},
+			this.props.style,
+		];
 	}
 
 	get errorContainerStyle() {
@@ -201,10 +208,11 @@ class InputContainer extends React.Component<Props> {
 	render() {
 		const {
 			containerStyle,
-			onPress,
+			LeftIconComponent,
 			onLayout,
-			touchable,
+			onPress,
 			outlined,
+			touchable,
 		} = this.props;
 
 		const RootComponent = touchable ? TouchableOpacity : View;
@@ -220,6 +228,11 @@ class InputContainer extends React.Component<Props> {
 					style={this.containerStyle}
 				>
 					<View style={[styles.contentContainer, { paddingLeft: outlined ? TEXT_LEFT_PADDING : 0 }]}>
+						{ Boolean(LeftIconComponent) && (
+							<View style={styles.leftIconContainer}>
+								{LeftIconComponent}
+							</View>
+						)}
 						{this.props.children}
 					</View>
 					<Animated.View style={this.errorIconContainerStyle}>
@@ -242,6 +255,7 @@ InputContainer.defaultProps = {
 	containerStyle: {},
 	error: null,
 	labelPosition: 'center',
+	LeftIconComponent: null,
 	onLayout: () => false,
 	onPress: () => false,
 	outlined: true,

@@ -5,11 +5,13 @@ import {
 	setFieldValue,
 	setFieldPristine,
 } from 'actions/personal-info';
+import { setUserData } from 'actions/user';
 
 const mapsStateToProps = (state: State) => ({ form: state.personalInfoForm });
 const mapDispatchToProps = {
-	setFieldValue,
 	setFieldPristine,
+	setFieldValue,
+	setUserData,
 };
 
 export default connect(
