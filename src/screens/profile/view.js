@@ -25,10 +25,10 @@ const buttons = [{
 	screen: SCREENS.PERSONAL_INFO,
 	label: 'Личные данные',
 	icon: 'personal-data',
-// }, {
-// 	screen: SCREENS.PROFILE_SCREEN,
-// 	label: 'Мои события',
-// 	icon: 'calendar',
+}, {
+	screen: SCREENS.EVENTS_SCREEN,
+	label: 'Мои события',
+	icon: 'calendar',
 // }, {
 // 	screen: SCREENS.PROFILE_SCREEN,
 // 	label: 'Платежная информация',

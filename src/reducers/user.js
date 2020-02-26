@@ -8,7 +8,7 @@ const initialState: UserState = {
 	birthday: '1996-10-08',
 	companyId: null,
 	email: 'yatsukbogdan@gmail.com',
-	events: [],
+	events: ['1', '2', '3', '4', '5', '6'],
 	facebookURL: 'https://url',
 	instagramURL: 'https://url',
 	interests: 'My interests',

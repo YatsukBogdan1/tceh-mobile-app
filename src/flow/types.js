@@ -31,6 +31,16 @@ export type AuthorizationFormState = {
 	},
 };
 
+export type Event = {
+	duration: number,
+	imageURI: string,
+	label: string,
+	timestamp: string,
+	type: string,
+};
+
+export type EventsState = { [string]: Event };
+
 export type UserState = {
 	about: string,
 	avatarURI: string,
@@ -99,6 +109,8 @@ export type PersonalInfoFormState = {
 
 export type State = {
 	authorizationForm: AuthorizationFormState,
+	events: EventsState,
 	personalInfoForm: PersonalInfoFormState,
 	registrationForm: RegistrationFormState,
+	user: UserState,
 };

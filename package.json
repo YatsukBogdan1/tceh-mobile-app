@@ -3,7 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "rnpm": {
-    "assets": ["src/assets/fonts"]
+    "assets": [
+      "src/assets/fonts"
+    ]
   },
   "scripts": {
     "android": "cd ./android && ./gradlew clean &&./gradlew app:assembleDebug && ./gradlew installDebug",
@@ -17,6 +19,7 @@
   "dependencies": {
     "@react-native-community/slider": "^2.0.8",
     "axios": "0.19.2",
+    "moment": "^2.24.0",
     "patch-package": "^6.2.0",
     "react": "16.9.0",
     "react-native": "0.61.5",
