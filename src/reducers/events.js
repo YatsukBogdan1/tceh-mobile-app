@@ -19,7 +19,7 @@ const initialState: EventsState = {
 		id: '2',
 		imageURI: IMAGE_ASSETS.EVENT_IMAGE_2,
 		label: 'Переговорная 2',
-		timestamp: '2020-02-26T14:00:00Z',
+		timestamp: '2020-02-27T14:00:00Z',
 		type: EVENT_TYPE_MEETING_ROOM,
 	},
 	'3': {
@@ -27,7 +27,7 @@ const initialState: EventsState = {
 		id: '3',
 		imageURI: IMAGE_ASSETS.EVENT_IMAGE_3,
 		label: 'Tceh Club Day',
-		timestamp: '2020-02-26T15:00:00Z',
+		timestamp: '2020-02-27T15:00:00Z',
 		type: EVENT_TYPE_PARTY,
 	},
 	'4': {
@@ -35,7 +35,7 @@ const initialState: EventsState = {
 		id: '4',
 		imageURI: IMAGE_ASSETS.EVENT_IMAGE_4,
 		label: 'Переговорная 3',
-		timestamp: '2020-02-26T16:00:00Z',
+		timestamp: '2020-02-27T16:00:00Z',
 		type: EVENT_TYPE_MEETING_ROOM,
 	},
 	'5': {

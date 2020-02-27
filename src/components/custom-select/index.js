@@ -41,7 +41,7 @@ class CustomSelect extends React.Component<Props> {
 
 		this.state = {
 			height: new Animated.Value(0),
-			iconRotationAngle: new Animated.Value(0),
+			iconRotationAngle: new Animated.Value(Math.PI),
 			maxHeight:  optionsHeight > 300 ? 300 : optionsHeight,
 			opacity: new Animated.Value(0),
 			opened: false,
@@ -63,7 +63,7 @@ class CustomSelect extends React.Component<Props> {
 			Animated.parallel([
 				Animated.timing(this.state.height, { toValue: 0, ...animationCommonConfig }),
 				Animated.timing(this.state.opacity, { toValue: 0, ...animationCommonConfig }),
-				Animated.timing(this.state.iconRotationAngle, { toValue: 0, ...animationCommonConfig }),
+				Animated.timing(this.state.iconRotationAngle, { toValue: Math.PI, ...animationCommonConfig }),
 			]).start(() => {
 				this.setState({ zIndex: 1 });
 			});
@@ -78,7 +78,7 @@ class CustomSelect extends React.Component<Props> {
 			Animated.parallel([
 				Animated.timing(this.state.height, { toValue: this.state.maxHeight, ...animationCommonConfig }),
 				Animated.timing(this.state.opacity, { toValue: 1, ...animationCommonConfig }),
-				Animated.timing(this.state.iconRotationAngle, { toValue: Math.PI, ...animationCommonConfig }),
+				Animated.timing(this.state.iconRotationAngle, { toValue: 0, ...animationCommonConfig }),
 			]).start();
 		});
 	};

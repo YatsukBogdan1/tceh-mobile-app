@@ -33,18 +33,18 @@ const buttons = [{
 // 	screen: SCREENS.PROFILE_SCREEN,
 // 	label: 'Платежная информация',
 // 	icon: 'wallet',
-// }, {
-// 	screen: SCREENS.PROFILE_SCREEN,
-// 	label: 'Сохраненное',
-// 	icon: 'heart',
-// }, {
+}, {
+	screen: SCREENS.SAVED_SCREEN,
+	label: 'Сохраненное',
+	icon: 'heart',
+}, {
 // 	screen: SCREENS.PROFILE_SCREEN,
 // 	label: 'Привилегии',
 // 	icon: 'flyers',
 // }, {
-// 	screen: SCREENS.PROFILE_SCREEN,
-// 	label: 'Настройки',
-// 	icon: 'gear',
+	screen: SCREENS.USER_SETTINGS_SCREEN,
+	label: 'Настройки',
+	icon: 'gear',
 }];
 
 class ProfileScreen extends React.Component<Props> {

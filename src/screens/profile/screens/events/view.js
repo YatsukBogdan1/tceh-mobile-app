@@ -9,8 +9,10 @@ import styles from './styles';
 import Calendar from './components/calendar';
 import IonIcon from 'react-native-vector-icons/dist/Ionicons';
 import type { Event } from 'flow/types';
-import EventItem from './components/event-item';
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
+import { getTimeString } from './utils';
+import { EVENT_TYPE_LABELS } from 'constants/events';
+import TouchableCard from 'components/touchable-card';
 
 type Props = {
 	events: Array<Event>,
@@ -50,12 +52,12 @@ class EventsScreen extends React.Component<Props> {
 	onBackPress = () => Navigation.pop(this.props.componentId);
 
 	renderEventItem = ({ item }) => (
-		<EventItem
+		<TouchableCard
 			imageURI={item.imageURI}
 			label={item.label}
 			onPress={() => false}
-			time={item.timestamp}
-			type={item.type}
+			description={getTimeString(item.timestamp, item.duration)}
+			type={EVENT_TYPE_LABELS[item.type]}
 		/>
 	);
 
@@ -80,7 +82,9 @@ class EventsScreen extends React.Component<Props> {
 				/>
 				<View style={styles.divider} />
 				<FlatList
+					ListEmptyComponent={<Text style={styles.noEventsText}>К сожалению у вас нету событий в указаную дату</Text>}
 					style={styles.scrollView}
+					keyExtractor={item => item.timestamp}
 					ItemSeparatorComponent={() => <View style={styles.scrollDivider}/>}
 					data={this.events}
 					renderItem={this.renderEventItem}

@@ -1,2 +1,7 @@
 export const EVENT_TYPE_MEETING_ROOM = 'EVENT_TYPE_MEETING_ROOM';
 export const EVENT_TYPE_PARTY = 'EVENT_TYPE_PARTY';
+
+export const EVENT_TYPE_LABELS = {
+	[EVENT_TYPE_MEETING_ROOM]: 'Meeting Room',
+	[EVENT_TYPE_PARTY]: 'Party',
+};

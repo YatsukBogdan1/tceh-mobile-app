@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import baseStyles from 'components/base/styles';
-import { COLORS } from 'theme';
+import {COLORS, FONT_WEIGHTS} from 'theme';
 
 export default StyleSheet.create({
 	container: {
@@ -9,6 +9,9 @@ export default StyleSheet.create({
 	divider: {
 		height: 1,
 		backgroundColor: COLORS.LIGHT_GREY,
+	},
+	bigDivider: {
+		height: 30,
 	},
 	label: {
 		...baseStyles.bigText,
@@ -26,17 +29,25 @@ export default StyleSheet.create({
 		zIndex: 100,
 	},
 	scrollView: {
-		backgroundColor: COLORS.WHITE,
 		flex: 1,
 		padding: 20,
 	},
-	scrollDivider: {
-		height: 20,
+	notificationsLabel: {
+		...baseStyles.smallText,
+		marginBottom: 5,
+		fontWeight: FONT_WEIGHTS.bold,
 	},
-	noEventsText: {
+	filterButtonsContainer: {
+		flexDirection: 'row',
+		paddingHorizontal: 10,
+	},
+	noSavedText: {
 		...baseStyles.bigText,
 		margin: 30,
 		textAlign: 'center',
 		color: COLORS.LIGHT_GREY,
+	},
+	languageSelectContainerStyle: {
+		marginTop: 30,
 	},
 });

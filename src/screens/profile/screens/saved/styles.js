@@ -29,11 +29,16 @@ export default StyleSheet.create({
 		backgroundColor: COLORS.WHITE,
 		flex: 1,
 		padding: 20,
+		marginTop: 20,
 	},
 	scrollDivider: {
 		height: 20,
 	},
-	noEventsText: {
+	filterButtonsContainer: {
+		flexDirection: 'row',
+		paddingHorizontal: 10,
+	},
+	noSavedText: {
 		...baseStyles.bigText,
 		margin: 30,
 		textAlign: 'center',

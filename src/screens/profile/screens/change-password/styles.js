@@ -1,14 +1,14 @@
 import { StyleSheet } from 'react-native';
 import baseStyles from 'components/base/styles';
-import { COLORS } from 'theme';
+import {COLORS, FONT_WEIGHTS} from 'theme';
 
 export default StyleSheet.create({
 	container: {
 		flex: 1,
 	},
-	divider: {
-		height: 1,
-		backgroundColor: COLORS.LIGHT_GREY,
+	contentContainer: {
+		flex: 1,
+		padding: 40,
 	},
 	label: {
 		...baseStyles.bigText,
@@ -25,18 +25,7 @@ export default StyleSheet.create({
 		justifyContent: 'center',
 		zIndex: 100,
 	},
-	scrollView: {
-		backgroundColor: COLORS.WHITE,
-		flex: 1,
-		padding: 20,
-	},
-	scrollDivider: {
-		height: 20,
-	},
-	noEventsText: {
-		...baseStyles.bigText,
-		margin: 30,
-		textAlign: 'center',
-		color: COLORS.LIGHT_GREY,
+	linkTextStyle: {
+		color: COLORS.MAIN_ORANGE_COLOR,
 	},
 });

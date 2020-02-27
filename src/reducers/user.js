@@ -1,4 +1,4 @@
-import { SET_USER_DATA } from 'actions/user';
+import {ON_SETTING_CHANGE, SET_USER_DATA} from 'actions/user';
 import type { UserState } from 'flow/types';
 import IMAGE_ASSETS from 'assets/images';
 
@@ -19,6 +19,14 @@ const initialState: UserState = {
 	position: 'Senior Software Developer',
 	skills: 'My Skills',
 	surname: 'Yatsuk',
+	settings: {
+		benefitsNotificationsEnabled: false,
+		language: 'ru',
+		meetingRoomNotificationsEnabled: false,
+		newCompanyNotificationEnabled: false,
+		newPostNotificationsEnabled: false,
+		socialNotificationsEnabled: false,
+	},
 };
 
 const user = (state: UserState = initialState, action) => {
@@ -27,6 +35,14 @@ const user = (state: UserState = initialState, action) => {
 			return {
 				...state,
 				...action.payload.data,
+			};
+		case ON_SETTING_CHANGE:
+			return {
+				...state,
+				settings: {
+					...state.settings,
+					[action.payload.field]: action.payload.value,
+				},
 			};
 		default:
 			return state;

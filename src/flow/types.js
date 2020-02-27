@@ -41,6 +41,15 @@ export type Event = {
 
 export type EventsState = { [string]: Event };
 
+export type UserSettings = {
+	benefitsNotificationsEnabled: boolean,
+	language: string,
+	meetingRoomNotificationsEnabled: boolean,
+	newCompanyNotificationEnabled: boolean,
+	newPostNotificationsEnabled: boolean,
+	socialNotificationsEnabled: boolean,
+}
+
 export type UserState = {
 	about: string,
 	avatarURI: string,
@@ -58,6 +67,7 @@ export type UserState = {
 	skills: string,
 	surname: string,
 	events: Array<string>,
+	settings: UserSettings,
 };
 
 export type PersonalInfoFormState = {
