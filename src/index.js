@@ -6,6 +6,7 @@ import moment from 'moment';
 require('moment/min/locales.min');
 
 moment.locale('ru');
+console.disableYellowBox = true;
 
 API.init();
 
@@ -14,26 +15,22 @@ export const start = () => {
 	Navigation.events().registerAppLaunchedListener(() => {
 		Navigation.setRoot({
 			root: {
-				bottomTabs: {
+				stack: {
 					children: [{
-						stack: {
-							children: [{
-								component: {
-									name: SCREENS.PROFILE_SCREEN,
-									options: {
-										bottomTab: {
-											text: 'Profile',
-										},
-									},
-								},
-							}],
+						component: {
+							name: SCREENS.INTRO_SCREEN,
 							options: {
-								topBar: {
-									visible: false,
+								bottomTab: {
+									text: 'Profile',
 								},
 							},
 						},
 					}],
+					options: {
+						topBar: {
+							visible: false,
+						},
+					},
 				},
 			},
 		});

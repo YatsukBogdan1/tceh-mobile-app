@@ -49,6 +49,7 @@ export default StyleSheet.create({
 		textAlign: 'center',
 		color: COLORS.WHITE,
 		position: 'absolute',
+		marginHorizontal: 30,
 		top: height * 0.46,
 	},
 	linkContainerStyle: {

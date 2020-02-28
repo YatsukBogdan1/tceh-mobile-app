@@ -5,7 +5,7 @@ import styles from './styles';
 import baseStyles from '../styles';
 import CustomButton from 'components/custom-button';
 import CustomTextInput from 'components/custom-text-input';
-import { validateField } from 'validations/auth-form';
+import { validateAuthFormField } from 'validations/auth-form';
 
 type Props = {
 	navigateToSmsCode: () => void,
@@ -20,7 +20,7 @@ class ForgotPasswordForm extends React.Component<Props> {
 
 	onPhoneChange = value => this.setState({
 		phoneValue: value,
-		phoneError: validateField('phone', value),
+		phoneError: validateAuthFormField('phone', value),
 	});
 	onPhoneBlur = () => this.setState({ phonePristine: false });
 

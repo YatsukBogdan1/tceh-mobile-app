@@ -11,6 +11,7 @@ import {
 import IMAGE_ASSETS from 'assets/images';
 import styles from './styles';
 import Swiper from 'react-native-swiper';
+import { Navigation } from 'react-native-navigation';
 import { COLORS } from 'theme';
 import Link from 'components/link-button';
 import CustomButton from 'components/custom-button';
@@ -20,6 +21,7 @@ import LoginForm from './components/login-form';
 import ForgotPasswordForm from './components/forgot-password-form';
 import NewPasswordForm from './components/new-password-form';
 import SmsCodeForm from './components/sms-code-form';
+import * as SCREENS from '../../constants/screens';
 
 const slides = [{
 	text: 'TCEH - это полностью готовые для работы офисы класса А в самом центре Киева.',
@@ -189,6 +191,32 @@ class IntroScreen extends React.Component {
 		}, 1000);
 	};
 
+	navigateToApp = () => {
+		Navigation.push(this.props.componentId, {
+			bottomTabs: {
+				children: [{
+					stack: {
+						children: [{
+							component: {
+								name: SCREENS.PROFILE_SCREEN,
+								options: {
+									bottomTab: {
+										text: 'Profile',
+									},
+								},
+							},
+						}],
+						options: {
+							topBar: {
+								visible: false,
+							},
+						},
+					},
+				}],
+			},
+		});
+	};
+
 	get logoStyle () {
 		return StyleSheet.compose(
 			styles.logo,
@@ -296,7 +324,9 @@ class IntroScreen extends React.Component {
 							navigateToNewPassword={this.scrollToNewPasswordFromSmsCode}
 							ref={_ref => this.smsCodeForm = _ref}
 						/>
-						<NewPasswordForm />
+						<NewPasswordForm
+							navigateToApp={this.navigateToApp}
+						/>
 					</Swiper>
 				</Animated.View>
 			</View>

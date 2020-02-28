@@ -1,5 +1,5 @@
 export const FONTS = {
-	MAIN_FONT: 'Helvetica',
+	MAIN_FONT: 'System',
 };
 
 export const COLORS = {

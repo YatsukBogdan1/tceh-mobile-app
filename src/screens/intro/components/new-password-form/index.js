@@ -5,9 +5,13 @@ import styles from './styles';
 import baseStyles from '../styles';
 import CustomButton from 'components/custom-button';
 import CustomTextInput from 'components/custom-text-input';
-import { validateField } from 'validations/auth-form';
+import { validateAuthFormField } from 'validations/auth-form';
 
-class NewPasswordForm extends React.Component<> {
+type Props = {
+	navigateToApp: () => void,
+}
+
+class NewPasswordForm extends React.Component<Props> {
 	state = {
 		passwordValue: '',
 		passwordError: null,
@@ -16,12 +20,12 @@ class NewPasswordForm extends React.Component<> {
 
 	onPasswordChange = value => this.setState({
 		passwordValue: value,
-		passwordError: validateField('phone', value),
+		passwordError: validateAuthFormField('phone', value),
 	});
 	onPasswordBlur = () => this.setState({ passwordPristine: false });
 
 	onSubmit = () => {
-		//
+		this.props.navigateToApp();
 	};
 
 	render() {
