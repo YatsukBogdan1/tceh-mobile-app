@@ -148,6 +148,7 @@ class IntroScreen extends React.Component {
 
 	onLoginPress = () => {
 		this.showAuthorizationContainer();
+		this.scrollToLoginFromRegistration();
 	};
 
 	showButtons = () => {
@@ -202,6 +203,24 @@ class IntroScreen extends React.Component {
 								options: {
 									bottomTab: {
 										text: 'Profile',
+									},
+								},
+							},
+						}],
+						options: {
+							topBar: {
+								visible: false,
+							},
+						},
+					},
+				}, {
+					stack: {
+						children: [{
+							component: {
+								name: SCREENS.LOCATIONS_SCREEN,
+								options: {
+									bottomTab: {
+										text: 'Locations',
 									},
 								},
 							},

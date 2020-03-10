@@ -10,7 +10,7 @@ import IonIcon from 'react-native-vector-icons/dist/Ionicons';
 import type { Event } from 'flow/types';
 import { Navigation } from 'react-native-navigation';
 import TouchableCard from 'components/touchable-card';
-import TouchableBadge from './components/touchable-badge';
+import TouchableBadge from 'components/touchable-badge';
 import IMAGE_ASSETS from 'assets/images';
 import {
 	LOCATIONS,

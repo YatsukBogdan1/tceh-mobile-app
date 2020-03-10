@@ -30,8 +30,8 @@ class ChangePasswordScreen extends React.Component<Props> {
 	onOldPasswordChange = (value) => this.setState({ oldPasswordValue: value });
 	onNewPasswordChange = (value) => this.setState({ newPasswordValue: value });
 
-	onOldPasswordBlur = (value) => this.setState({ oldPasswordPristine: false });
-	onNewPasswordBlur = (value) => this.setState({ newPasswordPristine: false });
+	onOldPasswordBlur = () => this.setState({ oldPasswordPristine: false });
+	onNewPasswordBlur = () => this.setState({ newPasswordPristine: false });
 
 	onBackPress = () => Navigation.pop(this.props.componentId);
 

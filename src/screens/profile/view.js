@@ -53,6 +53,12 @@ class ProfileScreen extends React.Component<Props> {
 		Navigation.push(this.props.componentId, {
 			component: {
 				name: screen,
+				options: {
+					bottomTabs: {
+						visible: screen !== SCREENS.USER_SETTINGS_SCREEN,
+						animate: true,
+					},
+				},
 			},
 		});
 	};

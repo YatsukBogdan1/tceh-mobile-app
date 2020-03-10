@@ -8,8 +8,9 @@ class CustomSlider extends React.Component<Props> {
 		const {
 			maxValue,
 			minValue,
-			value,
 			onChange,
+			step,
+			value,
 		} = this.props;
 
 		return (
@@ -18,6 +19,7 @@ class CustomSlider extends React.Component<Props> {
 				minimumTrackTintColor={COLORS.MAIN_ORANGE_COLOR}
 				minimumValue={minValue}
 				onValueChange={onChange}
+				step={step}
 				thumbTintColor={COLORS.MAIN_ORANGE_COLOR}
 				value={value}
 			/>

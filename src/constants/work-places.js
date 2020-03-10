@@ -1,0 +1,27 @@
+export const WORK_PLACES_CATEGORIES = {
+	OFFICE: 'OFFICE',
+	SINGLE_WORK_PLACE: 'SINGLE_WORK_PLACE',
+};
+
+export const WORK_PLACES_OPTIONS = [{
+	value: WORK_PLACES_CATEGORIES.OFFICE,
+	text: 'Офис',
+}, {
+	value: WORK_PLACES_CATEGORIES.SINGLE_WORK_PLACE,
+	text: 'Рабочее место',
+}];
+
+export const SINGLE_WORK_PLACE_TYPES = {
+	SOFA: 'SOFA',
+	TABLE: 'TABLE',
+};
+
+export const SINGLE_WORK_PLACE_TYPES_LABELS = {
+	[SINGLE_WORK_PLACE_TYPES.SOFA]: 'диван',
+	[SINGLE_WORK_PLACE_TYPES.TABLE]: 'стол + стул',
+};
+
+export const SINGLE_WORK_PLACE_TYPES_ICONS = {
+	[SINGLE_WORK_PLACE_TYPES.SOFA]: 'sofa',
+	[SINGLE_WORK_PLACE_TYPES.TABLE]: 'table',
+};

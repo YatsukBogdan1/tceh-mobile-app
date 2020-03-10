@@ -15,22 +15,27 @@ export const start = () => {
 	Navigation.events().registerAppLaunchedListener(() => {
 		Navigation.setRoot({
 			root: {
-				stack: {
+				bottomTabs: {
 					children: [{
-						component: {
-							name: SCREENS.INTRO_SCREEN,
-							options: {
-								bottomTab: {
-									text: 'Profile',
+						stack: {
+							children: [{
+								component: {
+									name: SCREENS.LOCATIONS_SCREEN,
+									options: {
+										topBar: {
+											visible: false,
+										},
+										bottomTab: {
+											text: 'Locations',
+										},
+										bottomTabs: {
+											visible: true,
+										},
+									},
 								},
-							},
+							}],
 						},
 					}],
-					options: {
-						topBar: {
-							visible: false,
-						},
-					},
 				},
 			},
 		});

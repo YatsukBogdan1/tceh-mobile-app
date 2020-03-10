@@ -8,6 +8,7 @@ import {
 import styles from './styles';
 
 type Props = {
+	color?: string,
 	containerStyle?: Object,
 	label: string,
 	onPress: () => void,
@@ -17,7 +18,15 @@ type Props = {
 const LinkButton = (props: Props) => (
 	<View style={[props.containerStyle, styles.container]}>
 		<TouchableOpacity style={styles.touchableArea} onPress={props.onPress}>
-			<Text style={[styles.label, props.textStyle]}>{props.label}</Text>
+			<Text
+				style={[
+					styles.label,
+					props.textStyle,
+					props.color ? { color: props.color } : {},
+				]}
+			>
+				{props.label}
+			</Text>
 		</TouchableOpacity>
 	</View>
 );
