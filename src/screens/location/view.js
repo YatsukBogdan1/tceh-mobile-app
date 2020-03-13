@@ -25,6 +25,7 @@ import Comment from './components/comment';
 import { COLORS } from 'theme';
 import Footer from 'components/footer';
 import * as SCREENS from '../../constants/screens';
+import {selectGallery} from './selectors';
 
 type Props = {
 	location: Object,
@@ -118,9 +119,10 @@ class LocationScreen extends React.Component<Props> {
 	navigateToGalleryModal = index => {
 		Navigation.showModal({
 			component: {
-				name: SCREENS.LOCATION_GALLERY_MODAL_SCREEN,
+				name: SCREENS.GALLERY_MODAL_SCREEN,
 				passProps: {
 					initialIndex: index,
+					gallery: this.props.location.gallery.reduce((photos, item) => [...photos, ...item.photos], []),
 				},
 			},
 		});

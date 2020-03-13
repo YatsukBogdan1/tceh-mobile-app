@@ -1,9 +1,10 @@
 // @flow
 import React from 'react';
 import {
-	Text,
-	View,
 	Image,
+	Text,
+	TouchableOpacity,
+	View,
 } from 'react-native';
 import styles from './styles';
 import baseStyles from 'components/base/styles';
@@ -13,7 +14,6 @@ import {
 	WORK_PLACES_CATEGORIES,
 } from 'constants/work-places';
 import TcehIcons from 'tceh-vector-icons';
-import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 
 type Props = {
 	capacity: string,
@@ -21,6 +21,7 @@ type Props = {
 	label: string,
 	liked: boolean,
 	onLikePress: () => void,
+	onPress: () => void,
 	price: number,
 	square: number,
 	subtype: string,
@@ -91,17 +92,19 @@ class Card extends React.Component<Props> {
 		} = this.props;
 
 		return (
-			<View style={baseStyles.shadowBox}>
-				<View style={styles.container}>
-					<Image
-						source={imageURI}
-						style={styles.image}
-					/>
-					<View style={styles.textContainer}>
-						{this.renderTextContent()}
+			<TouchableOpacity onPress={this.props.onPress}>
+				<View style={baseStyles.shadowBox}>
+					<View style={styles.container}>
+						<Image
+							source={imageURI}
+							style={styles.image}
+						/>
+						<View style={styles.textContainer}>
+							{this.renderTextContent()}
+						</View>
 					</View>
 				</View>
-			</View>
+			</TouchableOpacity>
 		);
 	}
 };

@@ -23,8 +23,9 @@ export const selectGallery = (state, locationId) => {
 		const galleryItem = {
 			...item,
 			photos: item.photos.map((photo, photoIndex) => ({
-				photo,
 				galleryIndex: photosCount + photoIndex,
+				label: item.name,
+				photo,
 			})),
 		};
 		photosCount += item.photos.length;

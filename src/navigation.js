@@ -4,21 +4,23 @@ import { Provider } from 'react-redux';
 import { Navigation } from 'react-native-navigation';
 import store from 'store';
 import * as SCREENS from 'constants/screens';
-import TemplateScreen from 'screens/template-screen';
-import UiKitDemoScreen from 'screens/ui-kit-demo';
-import IntroScreen from 'screens/intro';
-import ProfileScreen from 'screens/profile';
-import PersonalInfoScreen from 'screens/profile/screens/personal-info';
+import ChangePasswordScreen from 'screens/profile/screens/change-password';
 import EventsScreen from 'screens/profile/screens/events';
+import GalleryModalScreen from 'components/gallery-modal';
+import IntroScreen from 'screens/intro';
+import LocationGalleryScreen from 'screens/location/screens/gallery';
+import LocationScreen from 'screens/location';
+import LocationsScreen from 'screens/locations';
+import PersonalInfoScreen from 'screens/profile/screens/personal-info';
+import ProfileScreen from 'screens/profile';
 import SavedScreen from 'screens/profile/screens/saved';
 import SettingsScreen from 'screens/profile/screens/settings';
-import ChangePasswordScreen from 'screens/profile/screens/change-password';
-import LocationsScreen from 'screens/locations';
-import LocationScreen from 'screens/location';
-import LocationGalleryScreen from 'screens/location/screens/gallery';
-import LocationGalleryModalScreen from 'screens/location/components/gallery-modal';
-import WorkPlacesScreen from 'screens/work-places';
+import TemplateScreen from 'screens/template-screen';
+import UiKitDemoScreen from 'screens/ui-kit-demo';
+import WorkPlaceScreen from 'screens/work-place';
 import WorkPlacesFilterScreen from 'screens/work-places/screens/work-places-filter';
+import ModalContainer from 'components/modal-container';
+import WorkPlacesScreen from 'screens/work-places';
 
 const styles = StyleSheet.create({
 	container: {
@@ -34,10 +36,11 @@ const wrapWithSafeAreaView = Component => props => (
 
 export const registerScreens = () => {
 	Navigation.registerComponent(SCREENS.CHANGE_PASSWORD, () => wrapWithSafeAreaView(ChangePasswordScreen));
+	Navigation.registerComponent(SCREENS.COMMON_MODAL, () => ModalContainer);
+	Navigation.registerComponent(SCREENS.GALLERY_MODAL_SCREEN, () => GalleryModalScreen);
 	Navigation.registerComponent(SCREENS.UI_KIT_DEMO_SCREEN, () => wrapWithSafeAreaView(UiKitDemoScreen));
 	Navigation.registerComponentWithRedux(SCREENS.EVENTS_SCREEN, () => wrapWithSafeAreaView(EventsScreen), Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.INTRO_SCREEN, () => IntroScreen, Provider, store);
-	Navigation.registerComponentWithRedux(SCREENS.LOCATION_GALLERY_MODAL_SCREEN, () => LocationGalleryModalScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.LOCATION_GALLERY_SCREEN, () => LocationGalleryScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.LOCATION_SCREEN, () => LocationScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.LOCATIONS_SCREEN, () => wrapWithSafeAreaView(LocationsScreen), Provider, store);
@@ -46,6 +49,7 @@ export const registerScreens = () => {
 	Navigation.registerComponentWithRedux(SCREENS.SAVED_SCREEN, () => wrapWithSafeAreaView(SavedScreen), Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.TEMPLATE_SCREEN, () => wrapWithSafeAreaView(TemplateScreen), Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.USER_SETTINGS_SCREEN, () => wrapWithSafeAreaView(SettingsScreen), Provider, store);
-	Navigation.registerComponentWithRedux(SCREENS.WORK_PLACES_SCREEN, () => WorkPlacesScreen, Provider, store);
+	Navigation.registerComponentWithRedux(SCREENS.WORK_PLACE_SCREEN, () => WorkPlaceScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.WORK_PLACES_FILTERS_SCREEN, () => WorkPlacesFilterScreen, Provider, store);
+	Navigation.registerComponentWithRedux(SCREENS.WORK_PLACES_SCREEN, () => WorkPlacesScreen, Provider, store);
 };

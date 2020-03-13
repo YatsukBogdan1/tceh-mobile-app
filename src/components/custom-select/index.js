@@ -42,7 +42,7 @@ class CustomSelect extends React.Component<Props> {
 		this.state = {
 			height: new Animated.Value(0),
 			iconRotationAngle: new Animated.Value(Math.PI),
-			maxHeight:  optionsHeight > 300 ? 300 : optionsHeight,
+			maxHeight: optionsHeight > 300 ? 300 : optionsHeight,
 			opacity: new Animated.Value(0),
 			opened: false,
 			width: 0,

@@ -5,8 +5,9 @@ import { setFilter } from 'actions/work-places';
 const mapsStateToProps = state => ({
 	filters: state.workplaces.filters,
 	label: state.locations.data.park.name,
-	workplaces: state.locations.data.park.workplaces,
+	workplaces: state.locations.data.park.workplaces.map(id => state.workplaces.data[id]),
 });
+
 const mapDispatchToProps = {
 	setFilter,
 };

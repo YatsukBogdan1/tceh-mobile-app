@@ -20,16 +20,16 @@ export const start = () => {
 						stack: {
 							children: [{
 								component: {
-									name: SCREENS.LOCATIONS_SCREEN,
+									name: SCREENS.WORK_PLACES_SCREEN,
 									options: {
 										topBar: {
 											visible: false,
 										},
-										bottomTab: {
-											text: 'Locations',
-										},
+										// bottomTab: {
+										// 	text: 'Locations',
+										// },
 										bottomTabs: {
-											visible: true,
+											visible: false,
 										},
 									},
 								},

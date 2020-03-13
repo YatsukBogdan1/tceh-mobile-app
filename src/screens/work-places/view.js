@@ -50,8 +50,28 @@ class WorkPlaces extends React.Component {
 		);
 	}
 
+	onWorkplacePress = id => {
+		Navigation.push(this.props.componentId, {
+			component: {
+				name: SCREENS.WORK_PLACE_SCREEN,
+				passProps: {
+					id,
+				},
+				options: {
+					topBar: {
+						visible: false,
+					},
+					bottomTabs: {
+						visible: false,
+					},
+				},
+			},
+		});
+	};
+
 	renderWorkplaceItem = ({ item }) => (
 		<Card
+			onPress={() => this.onWorkplacePress(item.id)}
 			capacity={item.capacity}
 			imageURI={item.imageURI}
 			label={item.label}
