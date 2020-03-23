@@ -17,6 +17,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^2.2.3",
     "@react-native-community/slider": "^2.0.8",
     "axios": "0.19.2",
     "moment": "^2.24.0",

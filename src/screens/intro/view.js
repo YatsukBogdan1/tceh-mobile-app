@@ -199,10 +199,13 @@ class IntroScreen extends React.Component {
 					stack: {
 						children: [{
 							component: {
-								name: SCREENS.PROFILE_SCREEN,
+								name: SCREENS.LOCATIONS_SCREEN,
 								options: {
 									bottomTab: {
-										text: 'Profile',
+										text: 'Локации',
+										icon: IMAGE_ASSETS.HOME_ICON,
+										selectedIconColor: COLORS.MAIN_ORANGE_COLOR,
+										selectedTextColor: COLORS.MAIN_ORANGE_COLOR,
 									},
 								},
 							},
@@ -217,10 +220,34 @@ class IntroScreen extends React.Component {
 					stack: {
 						children: [{
 							component: {
-								name: SCREENS.LOCATIONS_SCREEN,
+								name: SCREENS.MEETING_ROOMS,
 								options: {
 									bottomTab: {
-										text: 'Locations',
+										text: 'Бронь',
+										icon: IMAGE_ASSETS.TABLET_ICON,
+										selectedIconColor: COLORS.MAIN_ORANGE_COLOR,
+										selectedTextColor: COLORS.MAIN_ORANGE_COLOR,
+									},
+								},
+							},
+						}],
+						options: {
+							topBar: {
+								visible: false,
+							},
+						},
+					},
+				}, {
+					stack: {
+						children: [{
+							component: {
+								name: SCREENS.PROFILE_SCREEN,
+								options: {
+									bottomTab: {
+										text: 'Профиль',
+										icon: IMAGE_ASSETS.PERSON_ICON,
+										selectedIconColor: COLORS.MAIN_ORANGE_COLOR,
+										selectedTextColor: COLORS.MAIN_ORANGE_COLOR,
 									},
 								},
 							},

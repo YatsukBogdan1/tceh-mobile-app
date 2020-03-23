@@ -1,6 +1,14 @@
-import { StyleSheet } from 'react-native';
-import {COLORS, FONT_WEIGHTS} from 'theme';
+import {
+	StyleSheet,
+	Dimensions,
+} from 'react-native';
+import {
+	COLORS,
+	FONT_WEIGHTS,
+} from 'theme';
 import baseStyles from 'components/base/styles';
+
+const { width } = Dimensions.get('window');
 
 const statusContainer = {
 	alignItems: 'center',
@@ -16,7 +24,8 @@ export default StyleSheet.create({
 		flex: 1,
 	},
 	image: {
-		height: 500,
+		height: 300,
+		width,
 	},
 	photoTourButton: {
 		position: 'absolute',

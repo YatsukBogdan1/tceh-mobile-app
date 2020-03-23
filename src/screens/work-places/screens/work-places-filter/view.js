@@ -10,8 +10,11 @@ import IonIcon from 'react-native-vector-icons/dist/Ionicons';
 import { Navigation } from 'react-native-navigation';
 import Footer from 'components/footer';
 import CustomSelect from 'components/custom-select';
-import {WORK_PLACES_CATEGORIES, WORK_PLACES_OPTIONS} from 'constants/work-places';
-import CustomFilterSlider from './components/custom-filter-slider';
+import {
+	WORK_PLACES_CATEGORIES,
+	WORK_PLACES_OPTIONS,
+} from 'constants/work-places';
+import CustomFilterSlider from 'components/custom-filter-slider';
 import CustomRadioButton from 'components/radio-button';
 
 class WorkPlacesFilters extends React.Component {

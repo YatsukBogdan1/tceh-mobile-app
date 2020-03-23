@@ -22,9 +22,10 @@ class Gallery extends React.Component<Props> {
 	navigateToGalleryModal = index => {
 		Navigation.showModal({
 			component: {
-				name: SCREENS.LOCATION_GALLERY_MODAL_SCREEN,
+				name: SCREENS.GALLERY_MODAL_SCREEN,
 				passProps: {
 					initialIndex: index,
+					gallery: this.props.gallery.reduce((photos, item) => [...photos, ...item.photos], []),
 				},
 			},
 		});

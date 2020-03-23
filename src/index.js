@@ -15,44 +15,19 @@ export const start = () => {
 	Navigation.events().registerAppLaunchedListener(() => {
 		Navigation.setRoot({
 			root: {
-				bottomTabs: {
+				stack: {
 					children: [{
-						stack: {
-							children: [{
-								component: {
-									name: SCREENS.WORK_PLACES_SCREEN,
-									options: {
-										topBar: {
-											visible: false,
-										},
-										// bottomTab: {
-										// 	text: 'Locations',
-										// },
-										bottomTabs: {
-											visible: false,
-										},
-									},
-								},
-							}],
+						component: {
+							name: SCREENS.INTRO_SCREEN,
+							options: {
+								topBar: {
+									visible: false,
+								}
+							}
 						},
 					}],
 				},
 			},
 		});
-
-		// uncomment to see intro
-
-		// Navigation.setRoot({
-		// 	root: {
-		// 		component: {
-		// 			name: SCREENS.INTRO_SCREEN,
-		// 			options: {
-		// 				bottomTab: {
-		// 					text: 'Profile',
-		// 				},
-		// 			},
-		// 		},
-		// 	},
-		// });
 	});
 };

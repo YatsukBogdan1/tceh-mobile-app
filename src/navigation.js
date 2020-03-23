@@ -21,6 +21,10 @@ import WorkPlaceScreen from 'screens/work-place';
 import WorkPlacesFilterScreen from 'screens/work-places/screens/work-places-filter';
 import ModalContainer from 'components/modal-container';
 import WorkPlacesScreen from 'screens/work-places';
+import MeetingRoomsScreen from 'screens/meeting-rooms';
+import MeetingRoomScreen from 'screens/meeting-room';
+import MeetingRoomsFiltersScreen from 'screens/meeting-rooms/screens/meeting-rooms-filter';
+import MeetingRoomsCalendarScreen from 'screens/meeting-rooms-calendar';
 
 const styles = StyleSheet.create({
 	container: {
@@ -36,14 +40,18 @@ const wrapWithSafeAreaView = Component => props => (
 
 export const registerScreens = () => {
 	Navigation.registerComponent(SCREENS.CHANGE_PASSWORD, () => wrapWithSafeAreaView(ChangePasswordScreen));
-	Navigation.registerComponent(SCREENS.COMMON_MODAL, () => ModalContainer);
 	Navigation.registerComponent(SCREENS.GALLERY_MODAL_SCREEN, () => GalleryModalScreen);
 	Navigation.registerComponent(SCREENS.UI_KIT_DEMO_SCREEN, () => wrapWithSafeAreaView(UiKitDemoScreen));
+	Navigation.registerComponentWithRedux(SCREENS.COMMON_MODAL, () => ModalContainer, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.EVENTS_SCREEN, () => wrapWithSafeAreaView(EventsScreen), Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.INTRO_SCREEN, () => IntroScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.LOCATION_GALLERY_SCREEN, () => LocationGalleryScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.LOCATION_SCREEN, () => LocationScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.LOCATIONS_SCREEN, () => wrapWithSafeAreaView(LocationsScreen), Provider, store);
+	Navigation.registerComponentWithRedux(SCREENS.MEETING_ROOM, () => MeetingRoomScreen, Provider, store);
+	Navigation.registerComponentWithRedux(SCREENS.MEETING_ROOMS, () => wrapWithSafeAreaView(MeetingRoomsScreen), Provider, store);
+	Navigation.registerComponentWithRedux(SCREENS.MEETING_ROOMS_CALENDAR, () => MeetingRoomsCalendarScreen, Provider, store);
+	Navigation.registerComponentWithRedux(SCREENS.MEETING_ROOMS_FILTERS_SCREEN, () => MeetingRoomsFiltersScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.PERSONAL_INFO, () => wrapWithSafeAreaView(PersonalInfoScreen), Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.PROFILE_SCREEN, () => wrapWithSafeAreaView(ProfileScreen), Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.SAVED_SCREEN, () => wrapWithSafeAreaView(SavedScreen), Provider, store);

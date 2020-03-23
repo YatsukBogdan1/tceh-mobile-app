@@ -158,7 +158,7 @@ const initialState = {
 	},
 };
 
-const registrationForm = (state = initialState, action) => {
+const workPlaces = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_FILTER:
 			return {
@@ -173,4 +173,4 @@ const registrationForm = (state = initialState, action) => {
 	}
 };
 
-export default registrationForm;
+export default workPlaces;

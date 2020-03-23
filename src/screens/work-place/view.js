@@ -52,8 +52,8 @@ class LocationScreen extends React.Component<Props> {
 			{
 				transform: [{
 					translateY: this.state.scrollY.interpolate({
-						inputRange: [-99999, 0, 500],
-						outputRange: [-99999, 0, 250],
+						inputRange: [0, 300],
+						outputRange: [0, 150],
 					}),
 				}, {
 					scaleX: this.state.scrollY.interpolate({
@@ -90,7 +90,7 @@ class LocationScreen extends React.Component<Props> {
 			component: {
 				name: SCREENS.COMMON_MODAL,
 				passProps: {
-					modalId: 'tour_request_modal',
+					id: 'tour_request_modal',
 				},
 				options: {
 					modalTransitionStyle: 'crossDissolve',

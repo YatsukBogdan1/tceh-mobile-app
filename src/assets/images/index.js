@@ -35,6 +35,9 @@ import OFFICE_11 from './office_11.png';
 import USER_1 from './user_1.png';
 import USER_2 from './user_2.png';
 import USER_3 from './user_3.png';
+import HOME_ICON from './home_icon.png';
+import TABLET_ICON from './tablet_icon.png';
+import PERSON_ICON from './person_icon.png';
 
 export default {
 	BENEFIT_1,
@@ -74,4 +77,7 @@ export default {
 	USER_1,
 	USER_2,
 	USER_3,
+	HOME_ICON,
+	TABLET_ICON,
+	PERSON_ICON,
 };

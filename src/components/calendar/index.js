@@ -9,7 +9,7 @@ import {
 	getDatesArray,
 	getDateString,
 	getWeekday,
-} from './utils';
+} from 'utils';
 import CalendarItem from './item';
 
 type Props = {

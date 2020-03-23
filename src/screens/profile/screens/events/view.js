@@ -6,7 +6,7 @@ import {
 	FlatList,
 } from 'react-native';
 import styles from './styles';
-import Calendar from './components/calendar';
+import Calendar from 'components/calendar';
 import IonIcon from 'react-native-vector-icons/dist/Ionicons';
 import type { Event } from 'flow/types';
 import { Navigation } from 'react-native-navigation';
