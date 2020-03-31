@@ -1,6 +1,7 @@
 import {
 	SET_FIELD_VALUE,
 	SET_FIELD_PRISTINE,
+	SET_FIELD_ERROR,
 } from 'actions/registration';
 import { validateAuthFormField } from 'validations/auth-form';
 import type { RegistrationFormState } from 'flow/types';
@@ -35,6 +36,14 @@ const registrationForm = (state: RegistrationFormState = initialState, action): 
 				errors: {
 					...state.errors,
 					[action.payload.field]: validateAuthFormField(action.payload.field, action.payload.value),
+				},
+			};
+		case SET_FIELD_ERROR:
+			return {
+				...state,
+				errors: {
+					...state.errors,
+					[action.payload.field]: action.payload.error,
 				},
 			};
 		case SET_FIELD_PRISTINE:

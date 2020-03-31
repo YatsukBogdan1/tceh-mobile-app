@@ -51,6 +51,7 @@ export type UserSettings = {
 }
 
 export type UserState = {
+	role: string,
 	about: string,
 	avatarURI: string,
 	birthday: string,

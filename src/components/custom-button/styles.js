@@ -19,4 +19,16 @@ export default StyleSheet.create({
 		fontWeight: FONT_WEIGHTS.semiBold,
 		letterSpacing: 1,
 	},
+	isLoadingContainer: {
+		position: 'absolute',
+		backgroundColor: 'rgba(255, 255, 255,0.5)',
+		top: -1,
+		bottom: -1,
+		left: -1,
+		right: -1,
+		zIndex: 100,
+		alignItems: 'flex-end',
+		paddingRight: 14,
+		justifyContent: 'center',
+	},
 });

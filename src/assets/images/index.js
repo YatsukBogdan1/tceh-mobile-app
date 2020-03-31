@@ -38,8 +38,15 @@ import USER_3 from './user_3.png';
 import HOME_ICON from './home_icon.png';
 import TABLET_ICON from './tablet_icon.png';
 import PERSON_ICON from './person_icon.png';
+import APPSIDER_LOGO from './appsider_logo.png';
+import COMPANY_BACKGROUND from './company_background.png';
+import STAFF_1 from './staff_1.png';
+import STAFF_2 from './staff_2.png';
+import STAFF_3 from './staff_3.png';
 
 export default {
+	APPSIDER_LOGO,
+	COMPANY_BACKGROUND,
 	BENEFIT_1,
 	BENEFIT_2,
 	BENEFIT_3,
@@ -80,4 +87,7 @@ export default {
 	HOME_ICON,
 	TABLET_ICON,
 	PERSON_ICON,
+	STAFF_1,
+	STAFF_2,
+	STAFF_3,
 };

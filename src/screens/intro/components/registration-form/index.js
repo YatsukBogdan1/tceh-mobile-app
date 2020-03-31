@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import {
+	setFieldError,
 	setFieldPristine,
 	setFieldValue,
 } from 'actions/registration';
@@ -13,6 +14,7 @@ import type { RegistrationFormState } from 'flow/types';
 import Link from 'components/link-button';
 import Icon from 'react-native-vector-icons/dist/Entypo';
 import { COLORS } from 'theme';
+import {API} from '../../../../api';
 
 type Props = {
 	form: RegistrationFormState,
@@ -23,6 +25,10 @@ type Props = {
 }
 
 class RegistrationForm extends React.Component<Props> {
+	state = {
+		registrationPending: false,
+	};
+
 	onNameChange = value => this.props.setFieldValue('name', value);
 	onPhoneChange = value => this.props.setFieldValue('phone', value);
 	onPasswordChange = value => this.props.setFieldValue('password', value);
@@ -31,8 +37,11 @@ class RegistrationForm extends React.Component<Props> {
 	onPhoneBlur = () => this.props.setFieldPristine('phone', false);
 	onPasswordBlur = () => this.props.setFieldPristine('password', false);
 
-	onSubmit = () => {
-		this.props.navigateToSmsCode();
+	setPhoneError = error => this.props.setFieldError('phone', error);
+	setPasswordError = error => this.props.setFieldError('password', error);
+
+	onSubmit = async () => {
+		// this.props.navigateToSmsCode();
 	};
 
 	render() {
@@ -58,6 +67,7 @@ class RegistrationForm extends React.Component<Props> {
 				<CustomTextInput
 					containerStyle={baseStyles.inputContainer}
 					error={!pristine.phone && errors.phone}
+					keyboardType='phone-pad'
 					label='Телефон'
 					onBlur={this.onPhoneBlur}
 					onChange={this.onPhoneChange}
@@ -79,6 +89,8 @@ class RegistrationForm extends React.Component<Props> {
 				<CustomButton
 					label='Регистрация'
 					onPress={this.onSubmit}
+					isLoading={this.state.registrationPending}
+					disabled={this.state.registrationPending}
 				/>
 				<Link
 					label='Уже есть аккаунт? Войти'
@@ -124,6 +136,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+	setFieldError,
 	setFieldPristine,
 	setFieldValue,
 };

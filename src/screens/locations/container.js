@@ -2,8 +2,11 @@ import { connect } from 'react-redux';
 import View from './view';
 
 const mapsStateToProps = state => ({
-	locations: Object.values(state.locations.data),
 	benefits: state.locations.benefits,
+	companies: Object.values(state.companies),
+	locations: Object.values(state.locations.data),
+	locationsObject: state.locations.data,
+	userRole: state.user.role,
 });
 
 const mapDispatchToProps = {};

@@ -14,6 +14,7 @@ import { COLORS } from 'theme';
 type Props = {
 	containerStyle?: Object,
 	error?: string,
+	keyboardType?: string,
 	label: string,
 	LeftIconComponent?: ComponentType,
 	multiline?: boolean,
@@ -107,6 +108,7 @@ class CustomTextInput extends React.Component<Props> {
 		const {
 			containerStyle,
 			error,
+			keyboardType,
 			label,
 			LeftIconComponent,
 			multiline,
@@ -129,6 +131,7 @@ class CustomTextInput extends React.Component<Props> {
 				style={this.contentContainerStyle}
 			>
 				<TextInput
+					keyboardType={keyboardType}
 					multiline={multiline}
 					onBlur={this.onBlur}
 					onChangeText={onChange}
@@ -162,6 +165,7 @@ class CustomTextInput extends React.Component<Props> {
 CustomTextInput.defaultProps = {
 	containerStyle: {},
 	error: null,
+	keyboardType: 'default',
 	LeftIconComponent: null,
 	multiline: false,
 	onBlur: () => false,

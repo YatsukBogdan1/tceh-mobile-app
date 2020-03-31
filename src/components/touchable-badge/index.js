@@ -9,6 +9,7 @@ type Props = {
 	active: boolean,
 	label: string,
 	onPress: () => void,
+	style?: Object,
 }
 
 class TouchableBadge extends React.Component<Props> {
@@ -17,7 +18,7 @@ class TouchableBadge extends React.Component<Props> {
 
 		return (
 			<TouchableOpacity
-				style={active ? styles.containerActive : styles.containerInactive}
+				style={[active ? styles.containerActive : styles.containerInactive, this.props.style]}
 				onPress={this.props.onPress}
 			>
 				<Text style={active ? styles.textActive : styles.textInactive}>{this.props.label}</Text>
@@ -25,5 +26,9 @@ class TouchableBadge extends React.Component<Props> {
 		);
 	}
 }
+
+TouchableBadge.defaultProps = {
+	style: {},
+};
 
 export default TouchableBadge;

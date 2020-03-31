@@ -1,10 +1,11 @@
 // @flow
 import React, { ComponentType } from 'react';
 import {
-	Text,
-	View,
-	TouchableOpacity,
+	ActivityIndicator,
 	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
 } from 'react-native';
 import styles from './styles';
 import { COLORS } from 'theme';
@@ -21,6 +22,7 @@ type Props = {
 	outlined: boolean,
 	RightIconComponent?: ComponentType,
 	style?: Object,
+	isLoading?: boolean,
 };
 
 class CustomButton extends React.Component<Props> {
@@ -49,6 +51,7 @@ class CustomButton extends React.Component<Props> {
 		const {
 			containerStyle,
 			disabled,
+			isLoading,
 			label,
 			labelStyle,
 			LeftIconComponent,
@@ -71,6 +74,11 @@ class CustomButton extends React.Component<Props> {
 					{LeftIconComponent}
 					<Text style={[this.labelStyle, labelStyle]}>{label}</Text>
 					{RightIconComponent}
+					{ isLoading && (
+						<View style={styles.isLoadingContainer}>
+							<ActivityIndicator color={COLORS.MAIN_ORANGE_COLOR} />
+						</View>
+					)}
 				</TouchableOpacity>
 			</View>
 		);
@@ -78,14 +86,15 @@ class CustomButton extends React.Component<Props> {
 }
 
 CustomButton.defaultProps = {
-	onLayout: () => false,
 	containerStyle: {},
 	disabled: false,
+	isLoading: false,
+	labelStyle: {},
 	LeftIconComponent: null,
+	onLayout: () => false,
 	outlined: false,
 	RightIconComponent: null,
 	style: {},
-	labelStyle: {},
 };
 
 export default CustomButton;
