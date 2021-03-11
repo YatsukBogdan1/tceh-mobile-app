@@ -87,3 +87,20 @@ export const TABS_LAYOUT = {
 		}],
 	},
 };
+
+export const getTestLayoutWithScreen = screen => ({
+	root: {
+		stack: {
+			children: [{
+				component: {
+					name: screen,
+					options: {
+						topBar: {
+							visible: false,
+						},
+					},
+				},
+			}],
+		},
+	},
+});

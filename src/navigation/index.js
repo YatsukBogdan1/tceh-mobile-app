@@ -9,6 +9,7 @@ import CompaniesScreen from '/screens/companies';
 import CompanyFormScreen from 'screens/profile/screens/company';
 import CompanyScreen from '/screens/company';
 import EventsScreen from 'screens/profile/screens/events';
+import FeedScreen from 'screens/feed';
 import GalleryModalScreen from 'components/gallery-modal';
 import IntroScreen from 'screens/intro';
 import LocationGalleryScreen from 'screens/location/screens/gallery';
@@ -52,6 +53,7 @@ export const registerScreens = () => {
 	Navigation.registerComponentWithRedux(SCREENS.COMPANY_FORM_SCREEN, () => CompanyFormScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.COMPANY_SCREEN, () => CompanyScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.EVENTS_SCREEN, () => wrapWithSafeAreaView(EventsScreen), Provider, store);
+	Navigation.registerComponentWithRedux(SCREENS.FEED_SCREEN, () => wrapWithSafeAreaView(FeedScreen), Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.INTRO_SCREEN, () => IntroScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.LOCATION_GALLERY_SCREEN, () => LocationGalleryScreen, Provider, store);
 	Navigation.registerComponentWithRedux(SCREENS.LOCATION_SCREEN, () => LocationScreen, Provider, store);

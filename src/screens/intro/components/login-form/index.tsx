@@ -3,42 +3,40 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import {
-	setFieldPristine,
-	setFieldValue,
+	setAuthorizationFormFieldPristine,
+	setAuthorizationFormFieldValue,
 } from 'actions/authorization';
 import styles from './styles';
 import baseStyles from '../styles';
 import CustomButton from 'components/custom-button';
 import CustomTextInput from 'components/custom-text-input';
-import type { AuthorizationFormState, State } from 'flow/types';
+import { AuthorizationFormState, State } from 'interfaces';
 import Link from 'components/link-button';
 import Icon from 'react-native-vector-icons/dist/Entypo';
 import { COLORS } from 'theme';
 
-type Props = {
-	form: AuthorizationFormState,
-	navigateToForgotPassword: () => void,
-	navigateToRegistration: () => void,
-	setFieldPristine: (name: string, value: string) => void,
-	setFieldValue: (name: string, value: string) => void,
+interface Props {
+    form: AuthorizationFormState;
+    navigateToForgotPassword: () => void;
+    navigateToRegistration: () => void;
+    onSubmit: () => void;
+    setFieldPristine: typeof setAuthorizationFormFieldPristine;
+    setFieldValue: typeof setAuthorizationFormFieldValue;
 }
 
 class LoginForm extends React.Component<Props> {
-	onPhoneChange = value => this.props.setFieldValue('phone', value);
-	onPasswordChange = value => this.props.setFieldValue('password', value);
+	onPhoneChange = (value: string) => this.props.setFieldValue('phone', value);
+	onPasswordChange = (value: string) => this.props.setFieldValue('password', value);
 
 	onPhoneBlur = () => this.props.setFieldPristine('phone', false);
 	onPasswordBlur = () => this.props.setFieldPristine('password', false);
-
-	onSubmit = () => {
-		//
-	};
 
 	render() {
 		const {
 			errors,
 			pristine,
 			values,
+			pending,
 		} = this.props.form;
 
 		return (
@@ -65,8 +63,10 @@ class LoginForm extends React.Component<Props> {
 					value={values.password}
 				/>
 				<CustomButton
+					isLoading={pending}
 					label='Войти'
-					onPress={this.onSubmit}
+					onPress={this.props.onSubmit}
+					disabled={pending}
 				/>
 				<Link
 					label='Забыли пароль?'
@@ -122,8 +122,8 @@ const mapStateToProps = (state: State) => ({
 });
 
 const mapDispatchToProps = {
-	setFieldPristine,
-	setFieldValue,
+	setFieldPristine: setAuthorizationFormFieldPristine,
+	setFieldValue: setAuthorizationFormFieldValue,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

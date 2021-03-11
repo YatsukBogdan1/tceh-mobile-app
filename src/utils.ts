@@ -4,25 +4,30 @@
 // be triggered. The function will be called after it stops being called for
 // N milliseconds. If `immediate` is passed, trigger the function on the
 // leading edge, instead of the trailing.
-import type { UserState } from 'flow/types';
+import { UserState } from 'interfaces';
 import moment from 'moment';
 
+// @ts-ignore
 export const debounce = (func, wait, immediate) => {
+// @ts-ignore
 	var timeout;
 	return function() {
+		// @ts-ignore
 		var context = this, args = arguments;
 		var later = function() {
 			timeout = null;
-			if (!immediate) func.apply(context, args);
+			if (!immediate) {func.apply(context, args);}
 		};
+		// @ts-ignore
 		var callNow = immediate && !timeout;
+		// @ts-ignore
 		clearTimeout(timeout);
 		timeout = setTimeout(later, wait);
-		if (callNow) func.apply(context, args);
+		if (callNow) {func.apply(context, args);}
 	};
 };
 
-export const createActionType = (prefix, actionType) => `${prefix}_${actionType}`;
+export const createActionType = (prefix: string, actionType: string): string => `${prefix}_${actionType}`;
 
 export const getPersonalInfoFormValuesFromUserState = (state: UserState) => ({
 	about: state.about,
@@ -42,7 +47,7 @@ export const getPersonalInfoFormValuesFromUserState = (state: UserState) => ({
 });
 
 
-export const getDatesArray = (minDate, maxDate) => {
+export const getDatesArray = (minDate: Date, maxDate: Date) => {
 	const datesArray = [];
 	let date = new Date(minDate);
 	date.setHours(0,0,0,0);
@@ -79,6 +84,6 @@ const WEEKDAYS_FULL = [
 	'Суббота',
 ];
 
-export const getWeekday = date => WEEKDAYS[date.getDay()];
-export const getDateString = date => `${WEEKDAYS_FULL[new Date(date).getDay()]}, ${moment(date).format('DD MMMM YYYY')}`;
-export const getShortDateString = date => moment(date).format('DD.MM.YYYY');
+export const getWeekday = (date: Date): string => WEEKDAYS[date.getDay()];
+export const getDateString = (date: Date): string => `${WEEKDAYS_FULL[new Date(date).getDay()]}, ${moment(date).format('DD MMMM YYYY')}`;
+export const getShortDateString = (date: string): string => moment(date).format('DD.MM.YYYY');

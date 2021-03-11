@@ -10,14 +10,14 @@ import {
 import baseStyles from '../styles';
 import CustomButton from 'components/custom-button';
 import CustomTextInput from 'components/custom-text-input';
-import type { RegistrationFormState } from 'flow/types';
+import { RegistrationFormState } from 'interfaces';
 import Link from 'components/link-button';
 import Icon from 'react-native-vector-icons/dist/Entypo';
 import { COLORS } from 'theme';
-import {API} from '../../../../api';
 
 type Props = {
 	form: RegistrationFormState,
+	onRegistrationSubmit: () => void,
 	navigateToLogin: () => void,
 	navigateToSmsCode: () => void,
 	setFieldPristine: (name: string, value: string) => void,
@@ -25,10 +25,6 @@ type Props = {
 }
 
 class RegistrationForm extends React.Component<Props> {
-	state = {
-		registrationPending: false,
-	};
-
 	onNameChange = value => this.props.setFieldValue('name', value);
 	onPhoneChange = value => this.props.setFieldValue('phone', value);
 	onPasswordChange = value => this.props.setFieldValue('password', value);
@@ -37,16 +33,10 @@ class RegistrationForm extends React.Component<Props> {
 	onPhoneBlur = () => this.props.setFieldPristine('phone', false);
 	onPasswordBlur = () => this.props.setFieldPristine('password', false);
 
-	setPhoneError = error => this.props.setFieldError('phone', error);
-	setPasswordError = error => this.props.setFieldError('password', error);
-
-	onSubmit = async () => {
-		// this.props.navigateToSmsCode();
-	};
-
 	render() {
 		const {
 			errors,
+			pending,
 			pristine,
 			values,
 		} = this.props.form;
@@ -88,9 +78,9 @@ class RegistrationForm extends React.Component<Props> {
 				/>
 				<CustomButton
 					label='Регистрация'
-					onPress={this.onSubmit}
-					isLoading={this.state.registrationPending}
-					disabled={this.state.registrationPending}
+					onPress={this.props.onRegistrationSubmit}
+					isLoading={pending}
+					disabled={pending}
 				/>
 				<Link
 					label='Уже есть аккаунт? Войти'

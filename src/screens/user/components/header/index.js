@@ -31,7 +31,7 @@ class Header extends React.Component<Props> {
 						onPress={this.props.onBackPress}
 					>
 						<IonIcon
-							name='ios-arrow-round-back'
+							name='ios-arrow-back'
 							size={30}
 							color={COLORS.BLACK}
 						/>
@@ -41,7 +41,7 @@ class Header extends React.Component<Props> {
 						onPress={this.props.onHeartPress}
 					>
 						<IonIcon
-							name={heartActive ? 'ios-heart' : 'ios-heart-empty'}
+							name={heartActive ? 'ios-heart' : 'ios-heart-outline'}
 							size={25}
 							color={COLORS.BLACK}
 						/>

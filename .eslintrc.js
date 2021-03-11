@@ -1,6 +1,7 @@
 module.exports = {
 	root: true,
 	extends: ['@react-native-community/eslint-config'],
+	parser: '@typescript-eslint/parser',
 	rules: {
 		'linebreak-style': ['error', 'unix'],
 		'no-cond-assign': ['error', 'always'],

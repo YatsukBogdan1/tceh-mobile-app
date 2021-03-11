@@ -4,14 +4,22 @@ import { registerScreens } from 'navigation';
 import { API } from 'api';
 import moment from 'moment';
 import {
+	getTestLayoutWithScreen,
 	INTRO_SCREEN_LAYOUT,
 	TABS_LAYOUT,
 } from 'navigation/layouts';
+import { FEED_SCREEN } from 'constants/screens';
 
 require('moment/min/locales.min');
 
 moment.locale('ru');
 console.disableYellowBox = true;
+global.XMLHttpRequest = global.originalXMLHttpRequest
+	? global.originalXMLHttpRequest
+	: global.XMLHttpRequest;
+global.FormData = global.originalFormData
+	? global.originalFormData
+	: global.FormData;
 
 API.init();
 
@@ -25,5 +33,6 @@ export const start = () => {
 			return;
 		}
 		Navigation.setRoot(INTRO_SCREEN_LAYOUT);
+		// Navigation.setRoot(getTestLayoutWithScreen(FEED_SCREEN));
 	});
 };

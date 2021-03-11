@@ -9,7 +9,7 @@ export const validatePhone = value => {
 	if (value.length === 0) {
 		return 'Введите телефон';
 	}
-	if (!/^3?8?0\d{9}$/.test(value)) {
+	if (!/^\+?3?8?(0\d{9})$/.test(value)) {
 		return 'Неверный формат';
 	}
 	return null;

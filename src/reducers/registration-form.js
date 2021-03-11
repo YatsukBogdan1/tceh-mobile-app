@@ -1,16 +1,21 @@
 import {
-	SET_FIELD_VALUE,
-	SET_FIELD_PRISTINE,
+	REGISTRATION_REQUEST,
+	REGISTRATION_REQUEST_FAIL,
+	REGISTRATION_REQUEST_SUCCESS,
 	SET_FIELD_ERROR,
+	SET_FIELD_PRISTINE,
+	SET_FIELD_VALUE,
+	VALIDATE_FORM,
 } from 'actions/registration';
 import { validateAuthFormField } from 'validations/auth-form';
 import type { RegistrationFormState } from 'flow/types';
 
 const initialState: RegistrationFormState = {
+	pending: false,
 	values: {
-		name: '',
-		phone: '',
-		password: '',
+		name: 'Bohdan',
+		phone: '0968246091',
+		password: '123456',
 	},
 	pristine: {
 		name: true,
@@ -50,9 +55,29 @@ const registrationForm = (state: RegistrationFormState = initialState, action): 
 			return {
 				...state,
 				pristine: {
-					...state.values,
+					...state.pristine,
 					[action.payload.field]: action.payload.pristine,
 				},
+			};
+		case VALIDATE_FORM:
+			return {
+				...state,
+				errors: {
+					name: validateAuthFormField('name', state.values.name),
+					phone: validateAuthFormField('phone', state.values.phone),
+					password: validateAuthFormField('password', state.values.password),
+				},
+			};
+		case REGISTRATION_REQUEST:
+			return {
+				...state,
+				pending: true,
+			};
+		case REGISTRATION_REQUEST_FAIL:
+		case REGISTRATION_REQUEST_SUCCESS:
+			return {
+				...state,
+				pending: false,
 			};
 		default:
 			return state;

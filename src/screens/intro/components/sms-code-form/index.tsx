@@ -1,12 +1,18 @@
 // @flow
 import React from 'react';
-import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native';
+import {View, Text, TextInput, TouchableWithoutFeedback, Alert} from 'react-native';
 import styles from './styles';
 import baseStyles from '../styles';
 import LinkButton from 'components/link-button';
+import {setRecoveryFormFieldValue} from '../../../../reducers/recovery-form';
+import {connect} from 'react-redux';
+import {State} from '../../../../interfaces';
+import { API } from 'api';
 
 type Props = {
-	navigateToNewPassword: () => void,
+	navigateToNewPassword: () => void;
+	setRecoveryFormFieldValue: typeof setRecoveryFormFieldValue;
+	phone: string;
 }
 
 class SmsCodeForm extends React.Component<Props> {
@@ -17,7 +23,7 @@ class SmsCodeForm extends React.Component<Props> {
 		cursorVisible: false,
 	};
 
-	componentDidMount(): * {
+	componentDidMount() {
 		this.cursorVisibleAnimation = setInterval(() => {
 			this.setState({ cursorVisible: !this.state.cursorVisible });
 		}, 700);
@@ -34,7 +40,7 @@ class SmsCodeForm extends React.Component<Props> {
 		return null;
 	};
 
-	componentWillUnmount(): * {
+	componentWillUnmount(){
 		clearInterval(this.cursorVisibleAnimation);
 	}
 
@@ -46,8 +52,18 @@ class SmsCodeForm extends React.Component<Props> {
 	onCodeChange = value => {
 		this.setState({ codeValue: value });
 		if (value.length === 4) {
+			this.props.setRecoveryFormFieldValue('code', this.state.codeValue);
 			this.props.navigateToNewPassword();
 			this.input.blur();
+		}
+	};
+
+	onResendPress = async () => {
+		try {
+			const response = await API.activationResend(this.props.phone);
+			Alert.alert('Успех', response.data.detail);
+		} catch (e) {
+			Alert.alert('Что то пошло не так', e.response.data.detail);
 		}
 	};
 
@@ -67,7 +83,7 @@ class SmsCodeForm extends React.Component<Props> {
 				<Text style={styles.text}>Не получили код?</Text>
 				<LinkButton
 					label='Отправить повторно'
-					onPress={() => false}
+					onPress={this.onResendPress}
 					textStyle={styles.link}
 				/>
 				<TextInput
@@ -83,4 +99,10 @@ class SmsCodeForm extends React.Component<Props> {
 	}
 }
 
-export default SmsCodeForm;
+const mapStateToProps = (state: State) => ({
+	phone: state.recoveryForm.phone,
+});
+
+const mapDispatchToProps = { setRecoveryFormFieldValue };
+
+export default connect(mapStateToProps, mapDispatchToProps)(SmsCodeForm);

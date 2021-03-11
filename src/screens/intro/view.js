@@ -15,14 +15,18 @@ import { Navigation } from 'react-native-navigation';
 import { COLORS } from 'theme';
 import Link from 'components/link-button';
 import CustomButton from 'components/custom-button';
-import { ANIMATION_VALUES } from './constants';
+import {
+	ANIMATION_VALUES,
+	AUTH_FORM_ORDERS,
+	AUTH_FORM_IDS,
+} from './constants';
 import RegistrationForm from './components/registration-form';
 import LoginForm from './components/login-form';
 import ForgotPasswordForm from './components/forgot-password-form';
 import NewPasswordForm from './components/new-password-form';
 import SmsCodeForm from './components/sms-code-form';
-import * as SCREENS from '../../constants/screens';
-import {TABS_LAYOUT} from '../../navigation/layouts';
+import { TABS_LAYOUT } from '../../navigation/layouts';
+import {onLoginSubmit} from '../../actions/authorization';
 
 const slides = [{
 	text: 'TCEH - это полностью готовые для работы офисы класса А в самом центре Киева.',
@@ -40,20 +44,84 @@ const animationConfig = {
 	easing: Easing.quad,
 };
 
+
+
 class IntroScreen extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
+			authFormOrder: AUTH_FORM_ORDERS.DEFAULT,
 			authorizationContainerTop: new Animated.Value(ANIMATION_VALUES.AUTHORIZATION_CONTAINER.HIDDEN.TOP),
+			authorizationStarted: false,
 			buttonsContainerBottom: new Animated.Value(ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.HIDDEN.BOTTOM),
 			buttonsContainerOpacity: new Animated.Value(ANIMATION_VALUES.AUTH_BUTTONS_CONTAINER.HIDDEN.OPACITY),
 			logoHeight: new Animated.Value(ANIMATION_VALUES.LOGO.INTRO_PAGE.HEIGHT),
 			logoTop: new Animated.Value(ANIMATION_VALUES.LOGO.INTRO_PAGE.TOP),
+			registrationStarted: false,
 			rootSwiperScrollEnabled: true,
 			smsCodeFormOpened: false,
 		};
 	}
+
+	navigateBetweenForms = (id1, id2) => {
+		const { authFormOrder } = this.state;
+		const id1Index = authFormOrder.findIndex(id => id1 === id);
+		const id2Index = authFormOrder.findIndex(id => id2 === id);
+		if (id2 === AUTH_FORM_IDS.SMS_CODE_FORM_ID && this.smsCodeForm) {
+			this.smsCodeForm.focusSmsCodeInput();
+		}
+		this.formScrollBy(id2Index - id1Index);
+	};
+
+	renderForm = id => {
+		switch (id) {
+			case AUTH_FORM_IDS.REGISTRATION_FORM_ID:
+				return (
+					<RegistrationForm
+						onRegistrationSubmit={this.onRegistrationSubmit}
+						navigateToLogin={() => this.navigateBetweenForms(id, AUTH_FORM_IDS.LOGIN_FORM_ID)}
+					/>
+				);
+			case AUTH_FORM_IDS.LOGIN_FORM_ID:
+				return (
+					<LoginForm
+						onSubmit={this.onLoginSubmit}
+						navigateToForgotPassword={() => this.navigateBetweenForms(id, AUTH_FORM_IDS.FORGOT_PASS_FORM_ID)}
+						navigateToRegistration={() => this.navigateBetweenForms(id, AUTH_FORM_IDS.REGISTRATION_FORM_ID)}
+					/>
+				);
+			case AUTH_FORM_IDS.FORGOT_PASS_FORM_ID:
+				return (
+					<ForgotPasswordForm
+						navigateToSmsCode={() => this.navigateBetweenForms(id, AUTH_FORM_IDS.SMS_CODE_FORM_ID)}
+					/>
+				);
+			case AUTH_FORM_IDS.SMS_CODE_FORM_ID:
+				return (
+					<SmsCodeForm
+						navigateToNewPassword={() => this.navigateBetweenForms(id, AUTH_FORM_IDS.NEW_PASSWORD_FORM_ID)}
+						ref={_ref => this.smsCodeForm = _ref}
+					/>
+				);
+			case AUTH_FORM_IDS.NEW_PASSWORD_FORM_ID:
+				return (
+					<NewPasswordForm
+						navigateToApp={this.navigateToApp}
+					/>
+				);
+		}
+	};
+
+	renderForms = () => (
+		<Swiper
+			ref={_ref => this.formsSwiper = _ref}
+			scrollEnabled={false}
+			showsPagination={false}
+		>
+			{this.state.authFormOrder.map(this.renderForm)}
+		</Swiper>
+	);
 
 	animateValues (animations) {
 		const _animations = [];
@@ -105,23 +173,6 @@ class IntroScreen extends React.Component {
 
 	formScrollBy = index => this.formsSwiper.scrollBy(index, true);
 
-	scrollToRegistrationFromLogin = () => this.formScrollBy(-1);
-
-	scrollToLoginFromRegistration = () => this.formScrollBy(1);
-
-	scrollToForgotPasswordFromLogin = () => this.formScrollBy(1);
-
-	scrollToSmsCodeFromRegistration = () => {
-		this.smsCodeForm.focusSmsCodeInput();
-		this.formScrollBy(3);
-	};
-	scrollToSmsCodeFromForgotPassword = () => {
-		this.smsCodeForm.focusSmsCodeInput();
-		this.formScrollBy(1);
-	};
-
-	scrollToNewPasswordFromSmsCode = () => this.formScrollBy(1);
-
 	showAuthorizationContainer = () => {
 		this.setState({ rootSwiperScrollEnabled: false });
 		this.animateValues([
@@ -147,9 +198,30 @@ class IntroScreen extends React.Component {
 		this.showAuthorizationContainer();
 	};
 
+	onRegistrationSubmit = () => {
+		this.setState({ authFormOrder: AUTH_FORM_ORDERS.REGISTRATION });
+		this.props.onRegistrationSubmit(response => {
+			if (response.status === 200 || response.status === 201) {
+				this.navigateBetweenForms(AUTH_FORM_IDS.REGISTRATION_FORM_ID, AUTH_FORM_IDS.SMS_CODE_FORM_ID);
+			} else {
+				this.setState({ authFormOrder: AUTH_FORM_ORDERS.DEFAULT });
+				this.setState({ registrationStarted: false });
+			}
+		});
+	};
+
 	onLoginPress = () => {
 		this.showAuthorizationContainer();
-		this.scrollToLoginFromRegistration();
+		this.navigateBetweenForms(AUTH_FORM_IDS.REGISTRATION_FORM_ID, AUTH_FORM_IDS.LOGIN_FORM_ID);
+	};
+
+	onLoginSubmit = () => {
+		this.setState({ authFormOrder: AUTH_FORM_ORDERS.LOGIN });
+		this.props.onLoginSubmit(response => {
+			if (response.status === 200) {
+				this.navigateToApp();
+			}
+		});
 	};
 
 	showButtons = () => {
@@ -284,30 +356,7 @@ class IntroScreen extends React.Component {
 					</View>
 				</Swiper>
 				<Animated.View style={this.authorizationContainerStyle}>
-					<Swiper
-						ref={_ref => this.formsSwiper = _ref}
-						scrollEnabled={false}
-						showsPagination={false}
-					>
-						<RegistrationForm
-							navigateToLogin={this.scrollToLoginFromRegistration}
-							navigateToSmsCode={this.scrollToSmsCodeFromRegistration}
-						/>
-						<LoginForm
-							navigateToForgotPassword={this.scrollToForgotPasswordFromLogin}
-							navigateToRegistration={this.scrollToRegistrationFromLogin}
-						/>
-						<ForgotPasswordForm
-							navigateToSmsCode={this.scrollToSmsCodeFromForgotPassword}
-						/>
-						<SmsCodeForm
-							navigateToNewPassword={this.scrollToNewPasswordFromSmsCode}
-							ref={_ref => this.smsCodeForm = _ref}
-						/>
-						<NewPasswordForm
-							navigateToApp={this.navigateToApp}
-						/>
-					</Swiper>
+					{this.renderForms()}
 				</Animated.View>
 			</View>
 		);

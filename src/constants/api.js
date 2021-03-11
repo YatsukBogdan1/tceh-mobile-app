@@ -1,1 +1,1 @@
-export const BASE_URL = 'http://tceh.test.appsider.net/api/v1/';
+export const BASE_URL = 'https://tceh.dev.appsider.net/api/v1/';

@@ -7,7 +7,6 @@ import baseStyles from 'components/base/styles';
 
 const container = {
 	height: 35,
-	flex: 1,
 	alignItems: 'center',
 	justifyContent: 'center',
 	borderWidth: 1,

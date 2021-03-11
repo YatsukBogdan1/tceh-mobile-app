@@ -69,7 +69,7 @@ class EventsScreen extends React.Component<Props> {
 					onPress={this.onBackPress}
 				>
 					<IonIcon
-						name='ios-arrow-round-back'
+						name='ios-arrow-back'
 						size={30}
 					/>
 				</TouchableOpacity>

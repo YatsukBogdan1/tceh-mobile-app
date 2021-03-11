@@ -54,7 +54,7 @@ const MessageInput = ({
 			>
 				<View style={value.length === 0 ? styles.arrowUpContainerDisabled : styles.arrowUpContainerActive}>
 					<Ionicons
-						name='ios-arrow-round-up'
+						name='ios-arrow-up'
 						size={28}
 						color={COLORS.WHITE}
 					/>

@@ -7,7 +7,7 @@ import {
 	StyleSheet,
 } from 'react-native';
 import InputContainer from 'components/base/input-container';
-import Icon from 'react-native-vector-icons/dist/Ionicons';
+import IonIcons from 'react-native-vector-icons/dist/Ionicons';
 import styles from './styles';
 import { COLORS } from 'theme';
 
@@ -149,7 +149,7 @@ class CustomTextInput extends React.Component<Props> {
 							onPress={this.toggleSecureTextEntry}
 							style={styles.secureTextEntryButton}
 						>
-							<Icon
+							<IonIcons
 								color={COLORS.LIGHT_GREY}
 								name={this.state.secureTextEntry ? 'ios-eye-off' : 'ios-eye'}
 								size={20}
